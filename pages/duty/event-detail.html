@@ -1,0 +1,36 @@
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td colspan="4" style="background: #f3f2f0">值班详情</td>
+    </tr>
+    <tr>    
+        <td class="td-text" >公司</td>
+        <td  width="30%">{{currentEvent.companyName}}</td>
+         <td class="td-text" >部门</td>
+        <td width="30%">{{currentEvent.departmentName}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" >值班人</td>
+        <td  width="30%">{{currentEvent.caretakerName}}</td>
+        <td class="td-text" >创建人</td>
+        <td >{{currentEvent.creatorName}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" >开始日期</td>
+        <td >{{currentEvent.startDate}}</td>
+        <td class="td-text" >结束日期</td>
+        <td >{{currentEvent.endDate}}</td>
+    </tr>
+   
+    <tr>
+        <td class="td-text" >备注</td>
+        <td colspan="3">{{currentEvent.description}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container" style="text-align: center">
+    <button href="#schedule" class="btn btn-primary" data-toggle="tab">返回</button>
+    <button href="#edit" class="btn btn-primary" style="margin-left: 30px" ng-click="editClick()">编辑</button>
+    <button data-toggle="tab" class="btn btn-primary" style="margin-left: 30px" ng-click="delete()">删除</button>
+</div>

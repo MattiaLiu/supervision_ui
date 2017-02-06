@@ -1,0 +1,122 @@
+{
+  "plantname":"headquaters",
+  "catalogs":{
+    "supervision": {
+         "server": "http://fqnpc.cnnp.com.cn:8010",
+        "header": {
+          "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+        },
+      "server0": "http://172.16.51.137:8010",
+      "header0": {
+        "apikey": "e71982d5401b488da4acef8827c41845"
+      },
+      "api": {
+         "supSourceUrl": "/api/cache/find/type/source-code",
+          "orgUrl": "/api/contact/getOrglist",
+          "supAreaUrl": "/api/cache/find/type/area-code",
+          "deptUrl": "/api/contact/getorgbyou",
+          "searchUrl": "/api/supervision/search",
+          "supDetailUrl": "/api/supervision/findchildren/%id%",
+          "supAddUrl": "/api/supervision/add",
+          "searchuserUrl": "/api/contact/searchuser",
+          "deptListUrl": "/api/contact/getchlistbyou",
+          "postphoneUrl": "/api/supervision/postpone/%id%",
+          "traceUrl": "/api/supervision/trace/%id%",
+          "closeUrl": "/api/supervision/close/%id%",
+          "revokeUrl": "/api/supervision/delete/%id%",
+          "traceHistory":"/api/supervision/findtrace/%id%",
+          "completedRateStatistics":"/api/supervision/completedRateStatistics/%id%"
+      }
+    },
+
+    "portal": {
+  	  	  "server": "http://w3.cnnp.com.cn:8010",
+  	    "header": {
+  	      "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+  	    },
+  	    "api":{
+  	        "portalSectorUrl": "/api/homepage/sector",
+  	        "catalogUrl": "/api/homepage/%id%",
+            "previewUrl":"/api/homepage/preview/%id%"
+  	    }
+  	},
+  	"personalpage":{
+         "server": "http://w3.cnnp.com.cn:8010",
+        "header": {
+          "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+        },
+        "api": {
+          "searchuserUrl":"/api/contact/searchuser",
+          "getChainsDetails":"/api/contact/Reportchain",
+          "getDuBanShiXiang":"/api/supervision/search",
+          "getRiChengTiXing":"/api/schedule/scheduleuserdate",
+          "getDepartment":"/api/contact/getorgbyou",
+          "getMember":"/api/contact/getorgmember",
+          "getMemberDetails":"/api/contact/getuserlist",
+          "getXingChengDetails":"/api/schedule/schedule/",
+          "getSameOrgDetails":"/api/contact/getorgmember"
+        }
+  	},
+     "personalpage_isolate":{
+      "server": "http://w3.cnnp.com.cn:8010",
+        "header": {
+          "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+        },
+        "api": {
+          "getYonghuKuaiJieRuKou":"/api/work/%id%",
+          "initUserKuaiJieRuKou":"/api/work/link",
+          "getJinQiGongZuo":"/api/task/web/interfaceTaskListService.action",
+          "popViewEdit":"/api/work/add",
+          "taskCount":"/api/fqtaskcount/GetFQMissionCounts"
+        }
+     },
+    "duty":{
+      "server": "http://10.15.251.119:8004",
+      "header": {
+        "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      },
+      "api": {
+        "getDutyList":"/api/v1.0/duties",
+        "editDuty":"/api/v1.0/duty",
+        "import":"/api/v1.0/import",
+        "delete":"/api/v1.0/duty/%id%"
+      }
+    },
+    "teamworkspace":{
+      "server": "http://172.16.51.137:8005",
+      "header": {
+        "apikey": "a16cb0c916404be78cb0805fefc7d26a"
+      },
+      "api": {
+        "edit":"/api/v1.0/social/",
+        "joinedSpaces":"/api/V1.0/collspace/Coll/{id}",
+        "publicSpaces":"/api/v1.0/social/public",
+        "managedSpaces":"/api/v1.0/social/{uid}/managed",
+        "followedSpaces":"/api/v1.0/social/{uid}/follow",
+        "spaceImage":"/api/v1.0/social/{id}/image",
+        "ownSpace":"/api/V1.0/collspace/MyColl/{id}",
+        "getDetail":"/api/v1.0/social/{id}",
+        "promote":"/api/v1.0/member/promote",
+        "demote":"/api/v1.0/member/demote",
+        "getMembers":"/api/v1.0/social/{id}/members",
+        "quit":"/api/v1.0/member/quit",
+        "getTopics":"/api/v1.0/social/{id}/topices",
+        "comment":"/api/v1.0/comment/",
+        "topicDetails":"/api/v1.0/topic/",
+        "deleteComment":"/api/v1.0/comment/{id}/delete"
+      }
+    },
+   "meeting":{
+      "server":"http://10.15.251.119:8005",
+      "header":{
+      },
+      "api":{
+        "getlist":"/api/v1.0/meetings",
+        "getdetail":"/api/v1.0/meeting/{id}",
+        "edit":"/api/v1.0/meeting",
+        "roomAgendaByCode":"/api/v1.0/meetings/romecode/{id}"
+      }
+
+    }
+  }
+}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>计划管理-详情</title>
+     <base id="baseTag">
+    <script>
+       document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
+    <!-- Bootstrap -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/daterangepicker.css" rel="stylesheet">   
+    <link href="assets/css/supervision.css" rel="stylesheet"> 
+    <script src="assets/libs/vue.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+</head>
+<body>
+<!--head-->
+<header>
+    <com-header></com-header>
+</header>
+<!--head end-->
+<article id="article">
+	      <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
+           计划管理
+              <template v-if="previous=='all'">><a type="button" href="pages/supervision/supervision-all.html">全部计划</a></template>
+              <template v-if="previous=='mine'">><a type="button" href="pages/supervision/supervision-mine.html">我的计划</a></template>
+              ><a type="button">计划详情</a>
+            </div>            
+<img class="horizontal-line" src="assets/images/hori-line.png"/>
+    <section class="details">
+	<ul class="nav nav-tabs" role="tablist" >
+	    <li role="presentation" :class="{'active':actpage=='mine'}"><a href="pages/supervision/supervision-mine.html" >我的计划</a></li>
+	    <li role="presentation" :class="{'active':actpage=='all'}"><a href="pages/supervision/supervision-all.html" >全部计划</a>
+	    </li>
+	    <li role="presentation" :class="{'active':actpage=='new'}"><a href="pages/supervision/supervision-edit.html">新建计划</a></li>
+	</ul>
+	<div class="tab-content">
+	<style scoped>
+		.table a:hover{
+			cursor: pointer;
+		}
+	</style>
+	    <div role="tabpanel" class="tab-pane fade in active" id="supervisionDetail_panel">
+		<table class="table table-bordered">
+		    <tr class="title1">
+			<td colspan="4">计划明细
+				
+			</td>
+		    </tr>
+		   
+		    <tr class="title2">
+			<td colspan="4" style="line-height: 3.4rem;padding: 4px;">计划任务详情
+			<style scoped>.btn{color:#337ab7;float: right;margin-right: 1rem;}</style>
+				<a class="btn btn-default" >办结</a>
+				<a class="btn btn-default" >生效计划</a>
+				<a class="btn btn-default" >解冻计划</a>
+				<a class="btn btn-default">冻结计划</a>
+				<a class="btn btn-default">撤销</a>	
+				<a class="btn btn-default" >编辑</a>
+				<a class="btn btn-default" >导出</a>			
+			</td>
+		    </tr>
+		    <tr>
+			<td class="al-right">计划名称</td>
+			<!-- /.al-right -->
+			<td class="al-left" colspan="3"><p class="td-content">{{name}}</p></td>
+			<!-- /.al-left -->
+		    </tr>
+		    <tr>
+			<td width="12%" class="al-right">计划编号</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{code}}</td>
+			<!-- /.al-left -->
+			<td width="12%" class="al-right" >开始时间</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{source_name}}</td>
+			<!-- /.al-left -->
+		    </tr>
+		    <tr>
+			<!-- /.al-left -->
+			<td width="12%" class="al-right" >计划完成时间</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{estimatedcompletetiontime}}</td>
+			<!-- /.al-left -->
+			<td width="12%" class="al-right"  >最后更新时间</td>
+			<td  width="38%"class="al-left"  >{{area_name}}</td>
+		    </tr>
+		    <tr>
+			<td width="12%" class="al-right">计划公开范围</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{accountablename}}</td>
+			<!-- /.al-left -->
+			<td width="12%" class="al-right">计划责任人</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{responsiblename}}</td>
+			<!-- /.al-left -->
+		    </tr>
+		    <tr>
+			<td width="12%" class="al-right">计划编制人</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left" v-text="responsibledeptname"></td>
+			<!-- /.al-left -->
+		
+			<td width="12%" class="al-right" >领域</td>
+			<!-- /.al-right -->
+			<td width="38%" class="al-left">{{area_name}}</td>
+			<!-- /.al-left -->
+		    </tr>
+		    <tr>
+				<td class="al-right">备注</td>
+				<td colspan="3" v-text="comments"></td>
+		    </tr>
+		  
+			<!-- 层级列表 -->
+			 <tr class="title2">
+				<td colspan="4" style="line-height: 3.4rem;padding: 4px;">计划任务列表
+					<a class="btn btn-default" style="float: right;margin-right: 1rem;" >添加计划任务项</a>
+				</td>
+		    </tr>
+		    <tr class="level-head">
+		    	<td colspan="4" style="padding: 0;">
+		    		<table class="table table-bordered pro-table">
+		    			<tr>
+		    				<td width="12%">事项进展</td>
+							<td width="20%">计划名称</td>
+							<td width="7%">发起人</td>
+							<td width="7%">责任人</td>
+							<td width="10%">计划完成时间</td>
+							<td width="20%">依赖的前置任务项名称</td>
+							<td width="18%">操作</td>
+							<td>进度</td>
+		    			</tr>
+		    			 <tr class="supervision-level">
+
+							<td rowspan="{{children.length+1}}">
+							    <div class="graph-unit">
+								<div class="progress">
+								    <div class="progress-bar progress-bar-success small-pro" role="progressbar"
+									 aria-valuenow="{{latestTrace.rate}}"
+									 aria-valuemin="0" aria-valuemax="100" :style="{width:latestTrace.rate+'%'}">
+									{{latestTrace.rate}}%
+								    </div>
+								</div>
+							    </div>
+							    <template v-for="item in children">
+								<div class="child-graph">
+								    <div class="left"></div>
+								    <div class="progress right">
+									<div class="progress-bar progress-bar-success small-pro" role="progressbar"
+									     aria-valuenow="{{item.latestTrace.rate}}" aria-valuemin="0"
+									     aria-valuemax="100" :style="{width:item.latestTrace.rate+'%'}">
+									    {{item.latestTrace.rate}}%
+									</div>
+								    </div>
+								</div>
+							    </template>			   
+							</td>
+							<td><p class="td-content">{{name}}</p></td>
+							<td class="middle"><p>{{accountablename}}</p></td>
+							<td class="middle"><p>{{responsiblename}}</p></td>
+							<td class="middle"><p>{{estimatedcompletetiontime}}</p></td>
+							<td class="middle"><p></p></td>
+							<td class="middle">
+							<style scoped>
+							.details .menu{
+								display: inline-block;
+								width: 50%;
+								margin-right: 0;
+								float: left;
+								font-weight: normal;
+							}
+					
+
+							</style>
+								<div v-if="status==0">
+								 	<a @click="editOperation(id)"  class="menu">编辑</a>
+								    <a :href="'pages/supervision/supervision-edit.html?pid='+id+'&pname='+escapeName" class="menu">新增子项</a>
+								    <a @click="delete('parent')" class="menu">删除</a>
+								     <a @click="check('parent')" class="menu">督办项</a>
+							   </div>
+							</td>
+					    </tr>
+		    		</table>
+		    	</td>
+				
+		    </tr>
+		   
+
+		    <tr class="supervision-level" v-for="item in children">
+			<td><a :href="'/pages/supervision/supervision-detail.html?id='+item.id" class="td-content">{{item.name}}</a></td>
+			<td class="middle"><p>{{item.accountablename}}</p></td>
+			<td class="middle"><p>{{item.responsiblename}}</p></td>
+			<td class="middle"><p>{{item.estimatedcompletetiontime}}</p></td>
+			<td class="middle">
+				<div v-if="item.status==0">
+				    <a  @click="editOperation(item.id)" class="menu">编辑</a>
+				    <!-- /.menu --><a @click="delete(item)" class="menu">删除</a>
+				</div>
+			    <!-- /.menu -->
+			</td>
+		    </tr>
+
+		    <!-- 历史记录 -->
+		    <tr class="title2">
+			<td colspan="4" class="al-left">计划修订记录</td>
+		    </tr>
+		    <!-- /.title2 -->
+		    <tr>
+			<td colspan="4" style="padding:0;">
+			    <table class="table table-bordered pro-table ">
+				<tr class="level-head">
+				    <td>修订时间</td>
+				    <td>修订人</td>
+				    <td width="50%">修订描述</td>
+				</tr>
+				<tr class="middle" v-for="trace in traceHistory">
+				    <td>{{trace.updatetime}}</td>
+				    <td>{{trace.operatorname}}</td>
+				    <td>{{trace.description}}</td>
+				</tr>
+				<!-- /.level-head -->
+			    </table>
+			</td>
+		    </tr>
+		    <!-- /.level-head -->
+		</table>
+		<!-- <update-rate :modal_id="progressModalId" :rate.sync="progressRate" ></update-rate> -->
+		<modal-pop :modal_id="modalId">
+				<template slot="body">					
+				  	<div v-show="currentModal=='delete'">确定要删除此计划吗？(确定点保存)</div>				  	
+				</template>
+				  <button type="button" class="btn btn-primary" @click="saveChanges" slot="save">保存</button>
+		</modal-pop>
+		<!-- detail tab end-->
+		<modal-pop :modal_id="'alertModal'">
+				<p slot="body" style="margin:0 auto;text-align: center;" v-text="alertMessage"></p>
+		</modal-pop>
+	    </div>
+	</div>
+    </section>
+    </div>
+
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+
+<script type="text/javascript" src="assets/libs/jquery.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/daterangepicker/moment.min.js"></script>
+<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+<script >
+	 var scriptList=['./dist/header-footer.js','./dist/supervision-detail.js'];
+</script>
+<script src="dist/main.js"></script>
+</body>
+</html>

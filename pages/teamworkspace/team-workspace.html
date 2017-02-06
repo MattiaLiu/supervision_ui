@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>协作空间</title>
+    <link href="/assets/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/teamworkspace/teamworkspace.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/teamworkspace/openWorkspace.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/dataTables.bootstra.css">
+    <link rel="stylesheet" href="/assets/css/wangEditor.min.css">
+    <script src="/assets/libs/vue.min.js"></script>
+</head>
+
+<body style="width: 100%; min-width: 1200px;">
+    <header>
+        <com-header></com-header>
+    </header>
+    <div class="container" id="topicDetails" style="width:100%; padding:0;">
+        <div class="co-title-div" style="border-bottom:0.5rem solid #a6cc38; width:100%; ">
+            <div class="co-title" style="width:100%;height: 100%">
+                <img src="/assets/images/portal/workspace/u204.png" class="co-title-img"><span class="co-title-span" style="font-size:14px;">协作空间</span>
+            </div>
+        </div>
+        <div style="width: 100%; height: 3rem; min-width: 1024px; margin-top: 1rem;">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="/pages/teamworkspace/teamworkspace-owner.html">查找空间</a></li>
+                <li role="presentation" class="active"><a href="/pages/teamworkspace/team-workspace.html">进入空间</a></li>
+                <li role="presentation"><a href="/pages/teamworkspace/teamworkspace-edit.html">新建空间</a></li>
+            </ul>
+        </div>
+        <div class="container" id="subheading" style="border-top:0; width: 100%; margin-top:2rem;">
+            <div style="float: left;">
+                <label for="exampleInputFile">中国核电ECM二期项目PMO</label>
+            </div>
+            <div style="float: right;">
+                <a href="#" class="graphics">加入此协作空间</a>
+            </div>
+        </div>
+        <!-- 主要内容   开始 -->
+        <div class="container" id="main-content" style="width:100%;">
+            <!-- 左边内容  开始 -->
+            <div class="main-content-left" id="mainContentLeft">
+                <img src="/assets/images/teamworkspace/u208.png" class="img-responsive" alt="Cinque Terre">
+                <!-- 管理员  开始 -->
+                <div style="padding-bottom: 20px; width: 100%;">
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">管理员</span>
+                        </div>
+                    </div>
+                    <div class="user-list" v-for="item in admins">
+                        <!-- <img class="img-circle" src="/assets/images/teamworkspace/userphoto.png"> -->
+                        <img src="/assets/images/teamworkspace/userphoto.png" style="background: #c7ec8f;" alt="" class="img-circle">
+                        <span v-text="item.username"></span>
+                    </div>
+                </div>
+                <!-- 管理员  结束 -->
+                <!-- 管理员职责  开始 -->
+                <div class="obligation" style="width: 100%;">
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">管理员职责</span>
+                        </div>
+                    </div>
+                    <div style="float: left; margin-left: 10px;">
+                        <p v-text="responsibility"></p>
+                    </div>
+                </div>
+                <!-- 管理员职责  结束 -->
+                <!-- 社区制度  开始 -->
+                <div class="regime" style="float: left; width: 100%;">
+                    <!-- <div class="img-line-left01"></div>
+                    <div style="float: left;">社区制度</div>
+                    <div class="img-line-left02"></div> -->
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">社区制度</span>
+                        </div>
+                    </div>
+                    <div style="float: left; margin-left: 10px;">
+                        <p v-text="collsystem"></p>
+                    </div>
+                </div>
+                <!-- 社区制度  结束 -->
+            </div>
+            <!-- 左边内容  结束 -->
+            <!-- 中间内容  开始 -->
+            <div class="main-content-mid">
+                <!-- 社区描述   开始 -->
+                <div class="community">
+                    <!-- <div class="img-line-mid01"></div>
+                    <div style="float: left;">社区描述</div>
+                    <div class="img-line-mid02"></div> -->
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">社区描述</span>
+                        </div>
+                    </div>
+                    <img src="/assets/images/teamworkspace/u249.png" class="img-responsive" alt="Cinque Terre">
+                    <div style="padding-left: 32.5px;" v-text="description"></div>
+                </div>
+                <!-- 社区描述   结束 -->
+                <!-- 文档   开始 -->
+                <div class="document">
+                    <div style="padding-top:10px;">
+                        <!-- <div class="img-line-mid01"></div>
+                        <div style="float: left;">文档</div>
+                        <div class="img-line-mid02"></div> -->
+                        <div class="co-leftDiv-doc-title">
+                            <div class="co-leftDiv-doc-title-bgLine">
+                                <span class="co-leftDiv-doc-title-char">文档</span>
+                            </div>
+                        </div>
+                    </div>
+                    <img alt="" src="/assets/images/teamworkspace/u265.png" class="img-u265" onclick="shrink('documentsAll');">
+                    <div style="margin-left: 20px;" id="documentid">
+                        <!-- 文档单个列表 -->
+                        <div id="documentThree">
+                        </div>
+                        <div id="documentsAll">
+                        </div>
+                    </div>
+                    <div class="check-all" onclick="showallDocuments();">
+                        <a style="font-size: 12px">查看全部</a>
+                    </div>
+                </div>
+                <!-- 文档   结束 -->
+                <!-- 任务协作   开始 -->
+                <div class="task">
+                    <div style="padding-top:10px;">
+                        <!-- <div class="img-line-mid01"></div>
+                        <div style="float: left;">任务协作</div>
+                        <div class="img-line-mid02"></div> -->
+                        <div class="co-leftDiv-doc-title">
+                            <div class="co-leftDiv-doc-title-bgLine">
+                                <span class="co-leftDiv-doc-title-char">任务协作</span>
+                            </div>
+                        </div>
+                    </div>
+                    <img alt="" src="/assets/images/teamworkspace/u265.png" class="img-u265">
+                    <div class="" id="taskSection">
+                        <table id="taskTable" style="font-size: small;text-align: center;" class="table table-striped table-bordered table-hover datatable">
+                            <style scoped>
+                            th {
+                                text-align: center;
+                            }
+                            </style>
+                            <thead>
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>发起人</th>
+                                <th>责任人</th>
+                                <th>计划完成</th>
+                                <th>紧急程度</th>
+                                <th>重要程度</th>
+                                <th>最新进展</th>
+                            </thead>
+                            <tbody id="taskTbody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 任务协作   结束 -->
+                <!-- 讨论组   开始 -->
+                <div class="discussion">
+                    <div style="padding-top:10px;">
+                        <!-- <div class="img-line-mid01"></div>
+                        <div style="float: left;">讨论组</div>
+                        <div class="img-line-mid02"></div> -->
+                        <div class="co-leftDiv-doc-title">
+                            <div class="co-leftDiv-doc-title-bgLine">
+                                <span class="co-leftDiv-doc-title-char">讨论组</span>
+                            </div>
+                        </div>
+                    </div>
+                    <img alt="" src="/assets/images/teamworkspace/u265.png" class="img-u265">
+                    <div style="margin-left: 20px; margin-top: 10px;" id="topicList">
+                        <div style="padding-top: 1rem; border-bottom:1px solid #CAC8C7;" v-for="item in discussitems" v-show="alltopicshowed||$index<3">
+                            <img style=" height: 19px; float: left; " src="/assets/images/teamworkspace/u217.png" class="img-responsive">
+                            <a style="cursor: pointer;" @click="gotoTopicDetailPage(item)" v-text="item.topicTitle" target="_blank"></a>
+                            <a v-if="isAdmin" style="cursor: pointer;margin-left: 1rem;font-size: 12px;color: orangered;" class="glyphicon glyphicon-remove" @click="beforeRemoveTopic($index)" title="删除该评论"></a>
+                            <div style="font-size: 12px;">发起人 <span>{{item.createUsername}}</span>|
+                                <span>{{item.createTime}}</span> | <span>{{item.commentNum}}个回复</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="check-all" v-if="discussitems.length>3">
+                        <a style="font-size: 12px;cursor: pointer;" @click="showTopics" v-text="alltopicshowed?'收起':'查看全部('+discussitems.length+')'"></a>
+                    </div>
+                </div>
+                <!-- 讨论组   结束 -->
+                <!-- 发帖开始 -->
+                <div class="topic" style="width:100%;">
+                    <div style="padding-bottom:30px;">
+                        <div class="co-leftDiv-doc-title">
+                            <div class="co-leftDiv-doc-title-bgLine">
+                                <span class="co-leftDiv-doc-title-char">发帖</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width:100%;">
+                        <!-- 主题输入框 -->
+                        <div class="form-group">
+                            <label for="name">主题</label>
+                            <input type="text" id="topicTitle" class="form-control" placeholder="请输入主题">
+                        </div>
+                        <label for="name">发帖内容</label>
+                        <!-- 加载编辑器的容器 -->
+                        <!--  <script id="container-text" name="content" type="text/plain">
+                            这里写你的发帖内容
+                        </script> -->
+                        <div id="container-text"></div>
+                        <!-- 配置文件 -->
+                        <!-- <script type="text/javascript" src="../../src/ueditor/ueditor.config.js"></script> -->
+                        <!-- 编辑器源码文件 -->
+                        <!-- <script type="text/javascript" src="../../src/ueditor/ueditor.all.js"></script> -->
+                        <!-- 实例化编辑器 -->
+                        <script type="text/javascript">
+                        // var ue = UE.getEditor('container-text');
+                        </script>
+                    </div>
+                    <!-- 提交按钮   -->
+                    <button type="button" class="btn btn-info" style="float:right; margin: 10px;" @click="sumbitext">提交</button>
+                </div>
+                <!--发帖结束  -->
+            </div>
+            <!-- 中间内容  结束 -->
+            <!-- 右边内容  开始 -->
+            <div style="float: left;" id="main-content-right">
+                <!-- 成员   开始 -->
+                <div class="member" id="empimgerurl">
+                    <!-- <div class="img-line-right01" ></div>
+                    <div style="float: left;">成员</div>
+                    <div class="img-line-right02" ></div> -->
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">成员</span>
+                        </div>
+                    </div>
+                    <div style="padding-left: 5px;">
+                        <div class="user-list" v-for="item in members" v-show="$index<3||allmembershowed">
+                            <!-- <img src="/assets/images/teamworkspace/userphoto.png"> -->
+                            <img src="/assets/images/personalpage/defaultUserPhoto.png" alt="" class="img-circle">
+                            <span v-text="item.username"></span>
+                        </div>
+                    </div>
+                    <div style=" padding-top: 10px; padding-left: 10px;" v-if="members.length>3">
+                        <a id="memberCollapse" style="font-size: 12px;cursor: pointer;" @click="showMembers" v-text="allmembershowed?'收起':'查看全部('+members.length+'人)'"></a>
+                    </div>
+                </div>
+                <!-- 成员   结束 -->
+                <!-- 相关协作空间   开始 -->
+                <div style="padding-top:2px;">
+                    <!-- <div class="img-line-right01"></div>
+                <div style="float: left;">相关协作空间</div>
+                <div class="img-line-right02"></div> -->
+                    <div class="co-leftDiv-doc-title">
+                        <div class="co-leftDiv-doc-title-bgLine">
+                            <span class="co-leftDiv-doc-title-char">相关协作空间</span>
+                        </div>
+                    </div>
+                    <div style="float: left; margin-top:0.5rem;" class="workspace-img">
+                        <div class="con" style="line-height: 40px; padding-left: 10px; margin-left: 0.5rem; width:100%;">
+                            <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                            <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                        </div>
+                        <div class="con" style="line-height: 40px; padding-left: 10px;margin-left: 0.5rem; width:100%;">
+                            <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                            <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                        </div>
+                        <div class="con" style="line-height: 40px; padding-left: 10px;margin-left: 0.5rem; width:100%;">
+                            <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                            <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                        </div>
+                        <div style="padding-top: 10px; padding-left: 10px; width:100%;">
+                            <a style="font-size: 12px;">查看全部(8)</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 相关协作空间   结束 -->
+            </div>
+            <!-- 右边内容  结束 -->
+        </div>
+        <!-- 主要内容   开始 -->
+    </div>
+
+    <!-- 提示框start -->
+    <div class="modal fade" id="alertModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">操作提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p style="width: 100%;text-align: center;" id="modaltxt">确定要删除此讨论组？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="saveHandler()">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- /.modal -->
+
+    <!-- 提示框end -->
+    <footer style="margin-top: 1rem; position: relative ;">
+        <com-footer></com-footer>
+    </footer>
+    <script src="/assets/libs/jquery-1.11.1.min.js"></script>
+    <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="/assets/libs/teamworkspace/moment.min.js"></script>
+    <script src="/assets/libs/teamworkspace/teamworkspaceUrl.js"></script>
+    <script src="/assets/libs/teamworkspace/jquery.dataTables.js"></script>
+    <script src="/assets/libs/jquery.blockUI.js"></script>
+    <script src="/assets/libs/wangEditor.min.js"></script>
+    <script src="/dist/main-override.js"></script>
+    <script type="text/javascript">
+    var weditor = null;
+    var spaceVm=null;
+    function showallDocuments() {
+        $("#documentsAll").show();
+    }
+
+    function shrink(parmar) {
+        if (parmar == "documentsAll") {
+            $("#documentsAll").hide();
+        }
+    }
+    $(function() {
+        var pid = '13ceb7690c0ecdc5-277fa3b914cbbd2a384-7f7a';
+        var getDocuments = "http://172.16.51.137:8010/api/contact/getFileinfo?apikey=e71982d5401b488da4acef8827c41845&pid=";
+        spaceVm = new Vue({
+            el: '#topicDetails',
+            data: {
+                id: null,
+                "createtime": "",
+                "createuserid": "",
+                "createusername": "",
+                "departmentid": "",
+                "departmentname": "",
+                "description": "",
+                "id": "",
+                "imgname": "",
+                "imgpath": "",
+                "member": "",
+                "responsibility": "",
+                "scope": "",
+                "updatetime": "",
+                //文档
+                docuitems: '',
+                //管理员
+                admins: [],
+                members: [],
+                discussitems: [],
+                alltopicshowed: false,
+                allmembershowed: false,
+                isAdmin: false,
+                operatingIndex:0
+            },
+            created: function() {
+                var _this = this;
+                /*------fetch the space details from server 获取详情  start------*/
+                $.ajax({
+                    url: "http://172.16.51.137:8005/api/v1.0/social/2c90b3095915d577015915d884100000",
+                    type: "get",
+                    success: function(result) {
+                        var tempobj = {
+                            "createtime": "",
+                            "createuserid": "",
+                            "createusername": "",
+                            "departmentid": "",
+                            "departmentname": "",
+                            "description": "",
+                            "id": "",
+                            "imgname": "",
+                            "imgpath": "",
+                            "member": "",
+                            "responsibility": "",
+                            "scope": "",
+                            "updatetime": ""
+                        };
+                        for (var key in tempobj) _this[key] = result[key];
+                        var users = result.users;
+                        var members = [],
+                            admins = [];
+                        for (var i = 0; i < users.length; i++) {
+                            if (users[i].type == 1) admins.push(users[i]);
+                            else if (users[i].type == 2) members.push(users[i]);
+                        }
+                        _this.members = members;
+                        _this.admins = admins;
+                        window.loginUser = {
+                            userid: getCookie("userid"),
+                            username: getCookie("username")
+                        };
+                        var userid = window.loginUser.userid;
+                        _this.isAdmin = userid == result.createuserid;
+                        if (!_this.isAdmin) {
+                            for (var i in admins) {
+                                if (userid == admins[i].userid) {
+                                    _this.isAdmin = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                    },
+                    error: function(err) {
+                        if (console) console.log("error", err);
+                    }
+                });
+                /*------fetch the space details from server 获取详情  end------*/
+                this.discusslist();
+            },
+            ready: function() {
+                weditor = new wangEditor('container-text');
+                
+                 weditor.config.uploadImgUrl = 'http://172.16.51.137:8005/api/v1.0/social/00/image';
+
+                // 配置自定义参数（举例）
+                // weditor.config.uploadParams = {
+
+                //     user: 'wangfupeng1988'
+                // };
+
+                // 设置 headers（举例）
+                // weditor.config.uploadHeaders = {
+                //     'Accept' : 'text/x-json'
+                // };
+                // 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
+                weditor.config.hideLinkImg = true;
+
+
+                // 自定义load事件
+                weditor.config.uploadImgFns.onload = function (resultText, xhr) {
+                    // resultText 服务器端返回的text
+                    // xhr 是 xmlHttpRequest 对象，IE8、9中不支持
+
+                    // 上传图片时，已经将图片的名字存在 editor.uploadImgOriginalName
+                    var originalName = weditor.uploadImgOriginalName || '';  
+
+                    // 如果 resultText 是图片的url地址，可以这样插入图片：
+                    weditor.command(null, 'insertHtml', '<img src="' + resultText + '" alt="' + originalName + '" style="max-width:100%;"/>');
+                    // 如果不想要 img 的 max-width 样式，也可以这样插入：
+                    // editor.command(null, 'InsertImage', resultText);
+                };
+
+                // 自定义timeout事件
+                weditor.config.uploadImgFns.ontimeout = function (xhr) {
+                    // xhr 是 xmlHttpRequest 对象，IE8、9中不支持
+                    alert('上传超时');
+                };
+
+                // 自定义error事件
+                weditor.config.uploadImgFns.onerror = function (xhr) {
+                    // xhr 是 xmlHttpRequest 对象，IE8、9中不支持
+                    alert('上传错误');
+                };
+
+                weditor.create();
+                this.getSupervision();
+
+            },
+            // 在 `methods` 对象中定义方法
+            methods: {
+                beforeRemoveTopic:function(index){
+                    this.operatingIndex=index;
+                    $("#alertModal").modal("show");
+                },
+                removeTopic:function(){
+                    var self=this;
+                    $.ajax({
+                        url:"http://172.16.51.137:8005/api/v1.0/topic/"+self.discussitems[self.operatingIndex].id+"/delete",
+                        type:"post",
+                        success:function(result){
+                            alert("删除成功");
+                            self.discussitems.splice(self.operatingIndex,1);
+                        },
+                        error:function(){
+                            alert("删除失败");
+                        }
+                    });
+                },
+                greet: function(event) {
+                    var _self = this;
+                    //请求后台,得到文档数据
+                    $.ajax({
+                        type: "get",
+                        // data:{pid:pid},//pid--项目id
+                        contentType: "application/json",
+                        url: getDocuments + pid, //需换成正式环境的url//接口名 /contacts/getFileinfo
+                        success(result, state, jqxhr) {
+                            var docuitems = [];
+                            var documentsThree = '';
+                            var documentsAllDoc = '';
+                            for (var i = 0; i < result.length; i++) {
+                                if (result[i].file_user_ == null || result[i].file_user_ == "null" || result[i].file_user_ == undefined) {
+                                    result[i].file_user_ = '';
+                                }
+                                if (result[i].createDate != null || result[i].createDate != "null" || result[i].createDate != undefined) {
+                                    var createDate = moment(result[i].createDate).format('YYYY-MM-DD');
+                                    result[i].createDate = createDate;
+                                }
+                                var iconImages = "";
+                                if ((typeof(result[i].imageurl) == "undefined") || (typeof(result[i].imageurl) == "")) {
+                                    iconImages = "/assets/images/personalpage/defaultUserPhoto.png";
+                                } else {
+                                    iconImages = result[i].imageurl;
+                                }
+                                var fileUser = result[i].file_user_ ? '中美' : '';
+                                if (i < 3) {
+                                    documentsThree = documentsThree + '<div style="border-bottom:1px solid #CAC8C7;"><img style="height: 20px; float: left;" ' +
+                                        'src="/assets/images/teamworkspace/u204(2).png" class="img-responsive"><a>' + result[i].file_name_ +
+                                        '</a><div style="font-size: 12px;">文件由<span >' + fileUser +
+                                        '</span>于<span>' + result[i].createDate + '</span> 创建 | <span>0次下载</span></div></div>';
+                                } else {
+                                    documentsAllDoc = documentsAllDoc + '<div style="border-bottom:1px solid #CAC8C7;"><img style="height: 20px; float: left;" ' +
+                                        'src="/assets/images/teamworkspace/u204(2).png" class="img-responsive"><a>' + result[i].file_name_ +
+                                        '</a><div style="font-size: 12px;">文件由<span >' + fileUser +
+                                        '</span>于<span>' + result[i].createDate + '</span> 创建 | <span>' + iconImages + '+次下载</span></div></div>';
+                                }
+                            }
+                            $("#documentThree").html(documentsThree);
+                            $("#documentsAll").hide();
+                            $("#documentsAll").html(documentsAllDoc);
+                            _self.docuitems = docuitems;
+                        },
+                        error(result, state, jqxhr) {
+                            console.log("error", jqxhr);
+                        }
+
+                    });
+                },
+
+                showTopics: function() {
+                    this.alltopicshowed = !this.alltopicshowed;
+                },
+                showMembers: function() {
+                    this.allmembershowed = !this.allmembershowed;
+                },
+                discusslist: function(event) {
+                    var _self = this;
+                    $.ajax({
+                        type: "get",
+                        //传递主题id
+                        // url: 'http://172.16.51.137:8000/api/V1.0/collspace/Colltopic/' + pid, //需换成正式环境的url
+                        url: 'http://172.16.51.137:8005/api/v1.0/social/2c90b3095915d577015915d884100000/topices',
+                        success(result, state, jqxhr) {
+                            console.log("result",result)
+                            var discussitems = [];
+                            jQuery.each(result, function(i, item) {
+                                item.commentNum = item.comments ? item.comments.length : 0;
+                                discussitems.push(item);
+                                //                      }
+                            });
+                            _self.discussitems = discussitems;
+                        },
+                        error(result, state, jqxhr) {
+                            console.log("error", jqxhr);
+                        }
+                    });
+                },
+                sumbitext: function(event) {
+                    loadingCover();
+                    var _self = this;
+                    //主题
+                    var topicTitle = $('#topicTitle').val().trim();
+                    //文本信息
+                    var topicContent = weditor.$txt.text();
+                    if (topicContent == null || topicContent == '') {
+                        alert('内容不能为空!');
+                        return;
+                    }
+                    if (topicTitle == null || topicTitle == '') {
+                        alert('主题不能为空!');
+                        return;
+                    }
+                    //collspaceid 空间ID  createuserid 用户信息   topicid 主题id  description 描述内容 remarkname 帖子标题
+                    //collspaceid:9,createuserid:5,topicid:'2',description:description,remarkname:remarkname
+                    $.ajax({
+                        type: "post",
+                        data: JSON.stringify({
+                            "collsapceid": "2c90b3095915d577015915d884100000",
+                            "createTime": "2016-12-26",
+                            "createUserid": "20107728",
+                            "createUsername": "陈龙",
+                            "topicContent": topicContent,
+                            "topicTitle": topicTitle
+                        }), //pid--项目id
+                        contentType: "application/json",
+                        url: 'http://172.16.51.137:8005/api/v1.0/topic/', //讨论组
+                        success(result, state, jqxhr) {
+                            if (result != null && result != 'null' && result != undefined) {
+                                alert('新增成功!');
+                                result.commentNum = 0;
+                                _self.discussitems.push(result);
+                            }
+                            $.unblockUI();
+                        },
+                        error(result, state, jqxhr) {
+                            $.unblockUI();
+                            console.log("error", jqxhr);
+                        }
+
+                    });
+                },
+                getSupervision: function() {
+                    $.ajax({
+                        url: "http://w3.cnnp.com.cn:8010/api/supervision/search?apikey=a16cb0c916404be78cb0805fefc7d26a&page=0&size=1000",
+                        type: "post",
+                        data: JSON.stringify({
+                            source: "PLACE,ADMIN"
+                        }),
+                        success: function(result) {
+                            var tasks = "";
+                            for (var i = 0; i < result.length; i++) {
+                                var rec = result[i];
+                                tasks += '<tr><td>' + rec.code + '</td>' +
+                                    '<td>' + rec.name + '</td>' +
+                                    '<td>' + rec.accountablename + '</td>' +
+                                    '<td>' + rec.responsiblename + '</td>' +
+                                    '<td>' + rec.estimatedcompletetiontime + '</td>' +
+                                    '<td>' + rec.urgency + '</td>' +
+                                    '<td>' + rec.importance + '</td>' +
+                                    '<td>' +
+                                    (rec.latestTrace ? rec.latestTrace : '无') +
+                                    '</td>' +
+                                    '</tr>'
+                            }
+                            $("#taskTbody").html(tasks);
+                            $("#taskTable").DataTable({
+                                "oLanguage": {
+                                    "sProcessing": "处理中...",
+                                    "sLengthMenu": "_MENU_ 记录/页",
+                                    "sZeroRecords": "没有匹配的记录",
+                                    "sInfo": "显示第 _START_ 至 _END_ 项记录，共 _TOTAL_ 项",
+                                    "sInfoEmpty": "显示第 0 至 0 项记录，共 0 项",
+                                    "sInfoFiltered": "(由 _MAX_ 项记录过滤)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "过滤:",
+                                    "sUrl": "",
+                                    "oPaginate": {
+                                        "sFirst": "首页",
+                                        "sPrevious": "上页",
+                                        "sNext": "下页",
+                                        "sLast": "末页"
+                                    }
+                                }
+                            });
+                        },
+                        error: function(err) {
+                            if (console) console.log("error", err);
+                        }
+                    });
+                },
+                gotoTopicDetailPage:function(item){
+                    var dataFromSpace={
+                        loginUser:window.loginUser,
+                        members:this.members,
+                        admins:this.admins,
+                        id:item.id,
+                        superAdmin:this.createuserid,
+                        lefthtml:$("#mainContentLeft").html(),
+                        righthtml:$("#main-content-right").html(),
+                        isAdmin:this.isAdmin
+                    };
+                    sessionStorage.setItem("dataFromSpace",JSON.stringify(dataFromSpace));
+                    window.open("/pages/teamworkspace/topic-detail.html?from=teamworkspace");
+                }
+
+            }
+        });
+        //加载文档数据
+        spaceVm.greet();
+    });
+
+    //confirm handler
+    function saveHandler(){
+        $("#alertModal").modal("hide");
+        spaceVm.removeTopic();
+    }
+    
+    function loadingCover(msg) {
+        $.blockUI({
+            message: msg,
+            css: {
+                border: 'none',
+                padding: '15px',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .5,
+                color: '#fff'
+            }
+        });
+    }
+
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td colspan="10" style="background: #f3f2f0">日程详情</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">姓名</td>
+        <td colspan="8" >{{currentEvent.people.username}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">开始日期</td>
+        <td colspan="4">{{currentEvent.startdate}}</td>
+        <td colspan="1" class="td-text">开始时间</td>
+        <td colspan="3">{{currentEvent.starttime}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">结束日期</td>
+        <td colspan="4">{{currentEvent.enddate}}</td>
+        <td class="td-text" colspan="1">结束时间</td>
+        <td colspan="3">{{currentEvent.endtime}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">标题</td>
+        <td colspan="4">{{currentEvent.title}}</td>
+        <td class="td-text" colspan="1">日程类型</td>
+        <td colspan="3" ng-if="currentEvent.scheduletype == 10025">会议类</td>
+        <td colspan="3" ng-if="currentEvent.scheduletype == 10026">行程类</td>
+        <td colspan="3" ng-if="currentEvent.scheduletype == 10027">值班类</td>
+        <td colspan="3" ng-if="currentEvent.scheduletype == 10028">委托类</td>
+        <td colspan="3" ng-if="currentEvent.scheduletype == 10029">休假类</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">地点</td>
+        <td colspan="4">{{currentEvent.address}}</td>
+        <td class="td-text" colspan="1">公开范围</td>
+        <td colspan="3" ng-if="currentEvent.scope == 10030">公开</td>
+        <td colspan="3" ng-if="currentEvent.scope == 10032">私密</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">日程链接</td>
+        <td colspan="8"><a href="currentEvent.sourcelink">{{currentEvent.sourcelink}}</a></td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">内容</td>
+        <td colspan="8">{{currentEvent.content}}</td>
+    </tr>
+    <tr>
+        <td class="td-text" colspan="2">备注</td>
+        <td colspan="8">{{currentEvent.other}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="container" style="text-align: center">
+    <button href="#schedule" class="btn btn-primary" data-toggle="tab">返回</button>
+    <button href="#edit" class="btn btn-primary" style="margin-left: 30px" ng-click="editClick()">编辑</button>
+    <button data-toggle="tab" class="btn btn-primary" style="margin-left: 30px" ng-click="delete()">删除</button>
+</div>

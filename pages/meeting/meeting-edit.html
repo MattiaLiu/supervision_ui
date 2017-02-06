@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>会议编辑</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/daterangepicker.css">
+        <link rel="stylesheet" href="/assets/css/fullcalendar.css">
+    <link rel="stylesheet" href="/assets/css/schedule/style.css">
+</head>
+
+<body ng-app="meetingApp">
+    <header>
+        <com-header></com-header>
+    </header>
+    <div ng-controller="meetingCtrl" class="content-border">
+        <div class="container" style="max-width: 100%;min-height: 500px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <h3>会议编辑</h3>
+                    <div id="myTabContent2" class="tab-content">
+                        <div class="tab-pane fade in active" id="add">
+                            <table class="table table-bordered table-striped">
+                                <tbody>
+                                <style scoped>
+                                    td{
+                                        vertical-align: middle!important;
+                                    }
+                                    .td-text{
+                                        font-size: 14px;
+                                    }
+                                    .form-control{
+                                        display: inline-block;
+                                    }
+                                </style>
+                                    <tr>
+                                        <td colspan="10" style="background: #f3f2f0">创建会议</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">会议名称</td>
+                                        <td colspan="8">
+                                            <input class="form-control" style="width: 100%;"  type="text" ng-model="addParams.topic">
+                                        </td>
+                                      
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">开始日期</td>
+                                        <td colspan="4">
+                                            <input type="text" class="form-control" id="startdate" style="width: 50%;"  />
+                                            <select class="form-control" ng-model="addParams.startTime" style="width: 45%;">
+                                                <option value="8:00">8:00</option>
+                                                <option value="8:30">8:30</option>
+                                                <option value="9:00" selected="selected">9:00</option>
+                                                <option value="9:30">9:30</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="10:30">10:30</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="11:30">11:30</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="12:30">12:30</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="13:30">13:30</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="14:30">14:30</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="15:30">15:30</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="16:30">16:30</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="17:30">17:30</option>
+                                                <option value="18:00">18:00</option>
+                                            </select>
+                                        </td>
+                                        <td class="td-text" colspan="1">组织部门</td>
+                                        <td colspan="3">
+                                            <button class="form-control" style="width: 30%;" ng-click="addOrgClick()">选择部门</button>
+                                            <input class="form-control" style="width: 66%;" type="text" id="departmentSelector" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">结束日期</td>
+                                        <td colspan="4">
+                                            <input type="text" class="form-control" id="enddate" style="width: 50%;"  ng-model="addParams.endDate" />
+                                            <select class="form-control" ng-model="addParams.endTime" style="width: 45%;">
+                                             <option value="8:00">8:00</option>
+                                                <option value="8:30">8:30</option>
+                                                <option value="9:00">9:00</option>
+                                                <option value="9:30">9:30</option>
+                                                <option value="10:00">10:00</option>
+                                                <option value="10:30">10:30</option>
+                                                <option value="11:00">11:00</option>
+                                                <option value="11:30">11:30</option>
+                                                <option value="12:00">12:00</option>
+                                                <option value="12:30">12:30</option>
+                                                <option value="13:00">13:00</option>
+                                                <option value="13:30">13:30</option>
+                                                <option value="14:00">14:00</option>
+                                                <option value="14:30">14:30</option>
+                                                <option value="15:00">15:00</option>
+                                                <option value="15:30">15:30</option>
+                                                <option value="16:00">16:00</option>
+                                                <option value="16:30">16:30</option>
+                                                <option value="17:00">17:00</option>
+                                                <option value="17:30">17:30</option>
+                                                <option value="18:00" selected="selected">18:00</option>
+                                            </select>
+                                        </td> 
+                                        <td class="td-text" colspan="1">主持人</td>
+                                        <td colspan="3">
+                                            <button class="form-control" style="width: 30%;" ng-click="addPeopleClick('single')">选择人员</button>
+                                            <input class="form-control" style="width: 66%;" type="text" ng-model="addParams.chairman" readonly>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">会议地点</td>
+                                        <td colspan="8">
+                                             <button class="form-control" style="width: 15%;" ng-click="locationClick()">选择地点</button>
+                                             <input class="form-control" style="width: 80%;" type="text" ng-model="addParams.roomName" id="locationInput">
+                                            <!-- <input class="form-control" style="width: 100%;" type="text" ng-model="addParams.roomName"> -->
+                                        </td>
+                                         
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">参会员工</td>
+                                        <td colspan="8">
+                                          <button class="form-control" style="width: 15%;" ng-click="addPeopleClick('multiple')">添加人员</button>
+                                          <div  style="display: inline-block;margin-bottom: 0;" class="participants">
+                                              <a ng-repeat="item in participants" onmouseover="showRemove(this)" onmouseout="hideRemove(this)" class="btn participant">{{item.username}}<span ng-click="removeUser($index)" class="glyphicon glyphicon-remove" style="margin-left:2px;display: none;color: red;"></span></a>
+                                          </div>
+                                              
+                                          </div>
+                                          
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">外部参会人员</td>
+                                        <td colspan="8">
+                                            <input class="form-control" style="width: 100%;" type="text" ng-model="addParams.external">
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td class="td-text" style="vertical-align: middle;" colspan="2">会议内容</td>
+                                        <td colspan="8">
+                                            <textarea class="form-control" rows="4" ng-model="addParams.content"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="td-text" colspan="2">会议材料</td>
+                                        <td colspan="8">
+                                            <div style="width: 80%;position: relative;height: 6rem;">
+                                                <button class="btn  btn-default btn-sm" style="position: absolute;right: 0;bottom: 0;">材料上传</button>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="container" style="text-align: center; margin-bottom: 10px">
+                                <button class="btn btn-primary" data-toggle="tab" ng-click="addMeeting()">保存</button>
+                                <button class="btn btn-primary" style="margin-left: 80px" href="#schedule" data-toggle="tab">取消</button>
+                            </div>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="peopleSelectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                            </button>
+                                            <h4 class="modal-title text-center" id="myModalLabel">
+                                                选择员工
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <input style="display: inline; padding: 5px" size="66" type="text" ng-model="searchParams.content" placeholder="请输入员工姓名或拼音">
+                                            <div style="display: inline">
+                                                <button class="btn btn-primary" style="margin-left: 10px" ng-click="searchPeople()">查询</button>
+                                            </div>
+                                            <div style="margin-top: 20px">
+                                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="td-text-title">选中</th>
+                                                            <th class="td-text-title">单位</th>
+                                                            <th class="td-text-title">处室</th>
+                                                            <th class="td-text-title">科室</th>
+                                                            <th class="td-text-title">姓名</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="odd gradeX" ng-repeat="user in searchParams.result">
+                                                            <td>
+                                                                <input type="checkbox" ng-checked="user.isChecked" ng-click="userSelect(user)" /> </td>
+                                                            <td>{{user.company}} </td>
+                                                            <td>{{user.office}} </td>
+                                                            <td>{{user.department}} </td>
+                                                            <td>{{user.displayName}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer; text-center" style="margin: 10px;">
+                                            <button type="button" class="btn btn-primary" ng-click="peopleConfig()">确定</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="orgSelectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                                            </button>
+                                            <h4 class="modal-title text-center">
+                                                选择组织
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul id="menus" style="list-style-type:none;" style="max-height: 500px">
+                                                <li ng-repeat="org in newOrgList" style="list-style-type:none;"><a style="padding-left: 10px">{{org.shortname}}</a>
+                                                    <ul style="list-style-type:none;">
+                                                        <li ng-repeat="secondLevelOrg in org.child" style="list-style-type:none;">
+                                                            <a ng-if="secondLevelOrg.child.length == 0" style="text-decoration:none; cursor:pointer;" ng-click="deptSelect(secondLevelOrg)">{{secondLevelOrg.name}}</a>
+                                                            <a ng-if="secondLevelOrg.child.length != 0" ng-click="deptSelect(secondLevelOrg)">{{secondLevelOrg.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal-footer; text-center" style="margin: 10px;">
+                                            <button type="button" class="btn btn-primary" ng-click="peopleConfig()">确定</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-controller="RoomCtrl">
+     <style scoped>
+     .room-section{
+        width: 84rem;
+     }
+            .left-room{
+                float: left;
+                width: 15%;
+                border:1px solid #ddd;
+                margin-top: 25px;
+                padding-top: 1rem;
+            }
+            .left-room ul{list-style: none;
+                border-top: 1px solid #f1edf7;
+                border-bottom: 1px solid #f1edf7;
+                overflow-y: scroll;
+                max-height: 70rem;
+                padding-top: 5px;
+            }
+            .left-room .title{
+                margin-bottom: 1rem;
+            }
+            .left-room .list-item{
+                /*background: #00a2e5;*/
+                width: 100%;
+                padding-bottom:5px;
+            }
+            .left-room .room-item{
+                cursor: pointer;
+            }
+            .left-room .room-item:hover{
+                background: #00a2e5;
+            }
+            .room-item:visited{
+                color:#00a2e5;
+            }
+            .calendar{
+                float: left;
+                width: 85%;
+            }
+            a.form-control{
+                text-decoration: none;
+            }
+        </style>
+        <!-- 模态框（Modal） -->
+<div class="modal fade" id="roomSelectModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 90rem;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center">
+                    会议室管理
+                </h4>
+            </div>
+            <div class="modal-body">
+            <section class="room-section">
+                  <div class="left-room" >
+                <p class="title">会议室列表</p>
+                    <ul id="roomList">
+                         <li class="list-item" ng-repeat="item in roomList">
+                            <a class="form-control room-item" ng-click="roomClick(item,$index)">{{item.dicname}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id='calendar'  class="calendar"></div>
+            </section>
+              
+            </div>
+            <div class="modal-footer; text-center" style="margin: 10px;">
+                <button type="button" class="btn btn-primary" ng-click="submitRoom()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+        
+    </div>
+    <footer>
+        <com-footer></com-footer>
+    </footer>
+    <script src="/assets/libs/angular/angular.min.js"></script>
+    <script src="/assets/libs/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap/bootstrap.min.js"></script>
+    <script src="/assets/libs/accordion.js"></script>
+    <script src="/assets/libs/daterangepicker/moment.min.js"></script>
+    <script src="/assets/libs/daterangepicker/daterangepicker.js"></script>
+        <script src='/assets/libs/fullcalendar.js'></script>
+        <script src='/assets/libs/jquery.blockUI.js'></script>
+        <script src="/assets/libs/vue.min.js"></script>
+    <script src="/assets/libs/ajaxfileupload.js"></script>
+    <script src='/src/meeting/meeting-service.js'></script> 
+        <script src='/src/meeting/meeting-edit.js'></script> 
+    <!--  <script>
+            var scriptList=['/dist/header_footer.js'];
+        </script>
+        <script src="/dist/main.js"></script> -->
+    <script src="/dist/main-override.js"></script>
+</body>
+
+</html>

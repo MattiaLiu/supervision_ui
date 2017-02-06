@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>个人页面</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <base href="" id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+    </script>
+    <base href="../../">
+    <link href="assets/css/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/personalpage/personalpage.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="assets/css/jqx/jqx.base.css" type="text/css"/>
+    <script type="text/javascript" src="assets/libs/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/libs/swiper/swiper-3.3.1.min.css">
+    <script src="assets/libs/vue.min.js"></script>
+</head>
+<header>
+    <com-header></com-header>
+</header>
+    <body style="min-width: 1233px; width: 100%; padding: 0px;">
+        <div class="container" style="min-width: 1233px; width: 100%; padding: 0px;">
+            <div style="margin-top: 0.5rem; width: 100%;" class="font-fam">个人工作台 >个人页面>按组织浏览 </div>
+            <div class="cover" id="loadingimg" style="position: relative;">
+                <img class="loading" src="assets/images/loading3.gif"></img>
+            </div>
+            <div class="container col-center-block container-div" style="min-height: 60rem; width: 100%;">
+                <div class="org-tab-li">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation"><a href="pages/personalpage/personalpage-detail.html" class="font-fam">个人页面</a></li>
+                        <li role="presentation" class="active"><a class="font-fam">按组织浏览</a></li>
+                        <li role="presentation"><a href="pages/personalpage/personalpage-list-search.html" class="font-fam">智能搜索</a></li>
+                    </ul>
+                </div>
+                <div style="width: 100%; min-height: 48rem; margin-top:1.5rem;">
+                    <div style="width: 23%;float: left; min-width: 29rem;">
+                        <div style="margin-bottom:1rem;">
+                            <div style="height: 2rem;">
+                                <div class="workHalfLine-div">
+                                    <span class="workHalfLine-span">组织树</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="treeview7" style="max-height:60rem;">
+                            <div id="loadingImgs">
+
+                            </div>
+                            <div id='jqxWidget'>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-member-card-list">
+                        <div style="width: 100%; float:left;" class="org-member-card-list-div" id="depDesc">
+                            <div style="height: 2rem;">
+                                <div class="workHalfLine-div">
+                                    <span class="workHalfLine-span">部门介绍</span>
+                                </div>
+                            </div>
+                            <div id="depDesctiption">
+                            </div>
+                        </div>
+                        <div class="org-member-card-list-div" style="margin-top:1rem;">
+                            <div style="width: 100%;" id="leaderArea">
+                                <div style="margin-bottom:1rem;" id="defaultLeader">
+                                    <div style="height: 2rem;">
+                                        <div class="workHalfLine-div">
+                                            <span class="workHalfLine-span">领导/负责人</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%; float:left;margin-top:1rem;" id="member">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+<footer style="margin-top: 1rem; position: relative ;">
+    <com-footer></com-footer>
+</footer>
+<script type="text/javascript" src="assets/libs/demos.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="assets/libs/jqwidgets/jqxtree.js"></script>
+<!-- <script type="text/javascript" src="assets/libs/personalpage/portUrl.js"></script> -->
+<!-- <script type="text/javascript" src="assets/libs/personalpage/contact.js"></script> -->
+<script src="assets/libs/swiper/swiper-3.3.1.jquery.min.js"></script>
+<script src="dist/main.js"></script>
+<script>
+    var scriptList=['dist/header-footer.js','assets/libs/personalpage/portUrl.js','assets/libs/personalpage/contact.js'];
+</script>
+<!-- <script src="dist/urlJsonport.js"></script> -->
+</html>

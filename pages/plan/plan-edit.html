@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>计划管理-编辑</title>
+    <base id="baseTag">
+    <script>
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/";
+        
+    </script>
+    <!-- Bootstrap -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">  
+    <link href="assets/css/daterangepicker.css" rel="stylesheet">   
+    <link href="assets/css/supervision.css" rel="stylesheet">  
+    <script src="assets/libs/vue.min.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+</head>
+<body>
+<!--head-->
+<header>
+    <com-header></com-header>
+</header>
+<!--head end-->
+
+<article id="article" class="create-supervision">
+     <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
+           计划管理
+             <template v-if="previous">><a type="button" :href="'pages/supervision/supervision-detail.html?id='+id">计划详情</a></template>
+              <template v-if="pid">><a type="button" :href="'pages/supervision/supervision-detail.html?id='+pid">计划详情</a></template>
+              ><a type="button">新建计划</a>
+     </div>
+     <img class="horizontal-line" src="assets/images/hori-line.png"/>
+	<ul class="nav nav-tabs" role="tablist">
+	    <li role="presentation"><a  @click="navtomine">我参与的计划</a></li>
+	    <li role="presentation"><a role="tab" data-toggle="tab" @click="navtoAll">我关注的计划</a>
+	    <li role="presentation"><a role="tab" data-toggle="tab" @click="navtoAll">全部计划</a>
+	    </li>
+	    <li role="presentation" class="active"><a href="#createSupervision_panel" role="tab"
+						      data-toggle="tab">新建计划</a></li>
+	</ul>
+	<div class="tab-content">
+	 <div role="tabpanel" class="tab-pane fade in active" >
+		<table class="table table-bordered">
+		    <tr class="title2">
+			<td colspan="4">新增计划
+			</td>
+		    </tr>		    
+		     <tr v-if="pname&&pname!=''&&pname!='null'">
+				<td width="13%" class="al-right">父计划</td>
+				<td colspan="3"><span  style="width: 100%;" v-text="pname"></span></td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">计划编号</td>
+			<td colspan="3">{{code}}</td>		
+		    </tr>
+		    <tr>
+				<td width="13%" class="al-right">计划名称</td>
+				<td  width="40%">
+					<input type="text" style="width: 100%;" v-model="name"/>
+				</td>		
+				<td width="15%" class="al-right">领域<span class="star"></span></td>
+				<td width="32%">
+				    <select class="form-control" v-model="areaSelected">
+					<option v-for="option in areaOptions" :value="option.value">{{option.text}}</option>
+				    </select>
+				</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">计划开始时间</td>
+			<td width="40%">
+			  <input type="text" class="form-control" id="startDate" style="width: 50%;" 
+			       v-model="estimatedcompletetiontime"    />
+			</td>
+			<td width="15%" class="al-right">计划结束时间</td>
+			<td width="32%">
+			    <input type="text" class="form-control" id="completeDate" style="width: 50%;" 
+			       v-model="estimatedcompletetiontime"    />
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">计划编制人员(A)</td>
+			<td width="40%">    
+                <style scoped>.outer-container{float: left;}</style>                            
+                <leader-select :given-params="leaderParams"  :selected-users.sync="leaders" ></leader-select>
+                <span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
+            </td>
+			<td width="15%" style="min-width:16.6rem;" class="al-right">计划公开范围</td>
+			<td width="32%">
+			    <select class="form-control" v-model="urgency">
+					<option v-for="option in urgencyOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+				<td width="13%" class="al-right">计划责任人(R)</td>
+				<td width="40%">
+				 <style scoped>.outer-container{float: left;}</style>                            
+	                                <leader-select :given-params="responsibleParams"  :selected-users.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+				</td>
+
+				
+				<td width="15%" class="al-right" style="min-width:15rem;">重要程度（5为最重要）</td>
+				<td width="34%">
+				    <select class="form-control" v-model="importance">
+						<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
+				    </select>
+				</td>
+		    </tr>
+		    <!-- <tr>
+		    				<td width="13%" class="al-right">责任部门</td>
+		    				<td colspan="3">
+		    				  <style scoped>.outer-container{display: inline-block;}</style>                            
+		            <com-accordion :selected-Depts.sync="selectedDept" :supervision-request="requests" multiple="false" 
+		    						btn_title="请选择"></com-accordion>
+		           <span style="display: inline-block;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsibledeptname}}</span>
+		    				</td>		
+		    </tr> -->
+		   
+		    <tr>
+			<td width="13%" class="al-right">备注</td>
+			<td colspan="3" class="al-left"><textarea style="width: 100%;" v-model="comments"></textarea>
+			 </td>
+		    </tr>		   
+		</table>
+		<div class="data-action" style="text-align: center;">
+		    <button class="btn btn-default" @click="submit_handler" style="margin:0 5rem;">保存</button> 
+		    <button class="btn btn-default" @click="cancel" style="margin:0 5rem;">取消</button>
+		</div>
+		</div>
+		</div>
+
+		
+		<modal-pop modal-title="操作提示" :modal_id="save_modal">
+			<p slot="body" style="margin:0 auto;text-align: center;" v-text="save_modal_txt"></p>
+		</modal-pop>
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+
+<script type="text/javascript" src="assets/libs/jquery.min.js"></script>
+<script type="text/javascript" src="assets/libs/bootstrap.min.js"></script>
+<script src="assets/libs/daterangepicker/moment.min.js"></script>
+<script src="assets/libs/daterangepicker/daterangepicker.js"></script>
+<script >
+	var scriptList=['./dist/header-footer.js','./dist/supervision-edit.js'];
+</script>
+<script src="dist/main.js"></script>
+</body>
+</html>

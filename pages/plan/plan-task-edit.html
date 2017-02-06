@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>计划管理-计划任务编辑</title>
+    <base id="baseTag">
+    <script>
+     function loadScript(url,callback){
+     	url+="?stamp="+(new Date().getTime());
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/"; 
+        loadCss("assets/css/font-awesome.min.css");
+        loadCss("assets/css/bootstrap.min.css");
+        loadCss("assets/css/daterangepicker.css");
+        loadCss("assets/css/supervision.css");
+    </script>  
+    <!-- Bootstrap -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+   
+</head>
+<body>
+<!--head-->
+<header>
+    <com-header></com-header>
+</header>
+<!--head end-->
+
+<article id="article" class="create-supervision">
+     <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
+           计划管理
+             <template v-if="previous">><a type="button" :href="'pages/supervision/plan-detail.html?id='+id">计划任务详情</a></template>
+              <template v-if="pid">><a type="button" :href="'pages/supervision/supervision-detail.html?id='+pid">计划任务详情</a></template>
+              ><a type="button">编辑计划任务</a>
+     </div>
+     <img class="horizontal-line" src="assets/images/hori-line.png"/>
+	<!-- <ul class="nav nav-tabs" role="tablist">
+	  
+	    <li role="presentation" class="active"><a role="tab"
+						      data-toggle="tab">编辑计划任务</a></li>
+	</ul> -->
+	<div class="tab-content">
+	 <div role="tabpanel" class="tab-pane fade in active" >
+		<table class="table table-bordered">
+
+		    <tr class="title2">
+			<td colspan="4">编辑任务事项
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">任务事项<span class="star"></span></td>
+			<td colspan="3"><input type="text" style="width: 100%;" v-model="name"/></td>
+		    </tr>
+		     <tr v-if="pname&&pname!=''&&pname!='null'">
+				<td width="13%" class="al-right">父任务</td>
+				<td colspan="3"><span  style="width: 100%;" v-text="pname"></span></td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">任务编号</td>
+			<td width="40%" v-if="code" v-text="code"></td>
+			<td width="40%" v-else style="color: lightgrey;">自动生成</td>
+			<td width="15%" class="al-right">任务来源<span class="star"></span></td>
+			<td width="34%">
+			    <select class="form-control" v-model="sourceSelected">
+				<option v-for="option in sourceOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">领域<span class="star"></span></td>
+			<td width="40%">
+			    <select class="form-control" v-model="areaSelected">
+				<option v-for="option in areaOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+			<td width="15%" class="al-right">完成时间<span class="star"></span></td>
+			<td width="34%">
+			    <input type="text" class="form-control" id="completeDate" style="width: 50%;" 
+			       v-model="estimatedcompletetiontime"    />
+			</td>
+		    </tr>
+		      <tr>
+			<td width="13%" class="al-right">发起人(A)<span class="star"></span></td>
+			<td width="40%">    
+                        <style scoped>.outer-container{float: left;}</style>                            
+                                <leader-select :given-params="leaderParams"  :selected-users.sync="leaders" ></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{accountablename}}</span>
+                            </td>
+			<td width="15%" style="min-width:16.6rem;" class="al-right">紧急程度（5为最紧急）</td>
+			<td width="34%">
+			    <select class="form-control" v-model="urgency">
+				<option v-for="option in urgencyOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		     <tr>
+		     <td width="13%" class="al-right">责任人(R)<span class="star"></span></td>
+			<td width="40%">
+			 <style scoped>.outer-container{float: left;}</style>                            
+                                <leader-select :given-params="responsibleParams"  :selected-users.sync="responsibleOptions"></leader-select><span style="float: left;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsiblename}}</span>
+			</td>
+			
+			<td width="15%" class="al-right" style="min-width:15rem;">重要程度（5为最重要）</td>
+			<td width="34%">
+			    <select class="form-control" v-model="importance">
+				<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">责任部门<span class="star"></span></td>
+			<td colspan="3" >
+			  <style scoped>.outer-container{display: inline-block;}</style>                            
+                                <com-accordion :selected-Depts.sync="selectedDept" :supervision-request="requests" multiple="false" 
+		     btn_title="请选择"></com-accordion>
+                               <span style="display: inline-block;margin-bottom: 0;margin-left:2rem;border:none;width: auto;vertical-align: middle;height: 3.3rem;line-height: 3.3rem;">{{responsibledeptname}}</span>
+			 </td>
+			
+			
+		    </tr>
+		    <tr>
+		    	<td width="13%" class="al-right">前置依赖项</td>
+		    	<td colspan="3" >
+			    <select class="form-control" v-model="importance">
+				<option v-for="option in importanceOptions" :value="option.value">{{option.text}}</option>
+			    </select>
+			</td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">协办及通知部门</td>
+			<td colspan="3"> <com-accordion :selected-Depts.sync="selectedDepts" :supervision-request="requests" multiple="true"  btn_title="请选择"></com-accordion>
+			<input style="width: 85%;height:3.3rem;display: inline-block; border: none;" v-model="scope"/>
+		    
+			 </td>
+		    </tr>
+		    <tr>
+			<td width="13%" class="al-right">备注</td>
+			<td colspan="3" class="al-left"><textarea style="width: 100%;" v-model="comments"></textarea>
+			 </td>
+		    </tr>
+		      <tr>
+			<td width="13%" class="al-right">附件</td>
+			<td colspan="3" class="al-left">
+			<div  style="width: 100%;position: relative;">
+			      <style scoped>
+					.attachment::before{
+						margin-bottom: -2px;
+						content: "";
+						display: inline-block;
+						width: 1.8rem;
+						height: 1.8rem;
+						background: url(assets/images/attachment.png);
+					}
+					.attachment{
+						margin-right: 2rem;
+						cursor: pointer;
+					}
+			      </style>
+			    <button class="btn btn-default accessoryBtn">附件上传</button>
+			     <iframe style="width: 82px;height: 34px;opacity: 0;position: absolute;top: 0;left: 0;" src="http://bjecm.cnnp.com.cn/cnnpdm/service.jsp?action=uploadAndView" frameborder="0"></iframe>
+			     <template v-for="attachment in attachments">
+			     	<a  class="attachment">attachment.name</a>
+			     </template>
+			    
+			    <!-- <file-uploader></file-uploader> -->
+			</div>
+			 </td>
+		    </tr>
+		</table>
+		<div class="data-action" style="text-align: center;">
+		    <button class="btn btn-default" @click="submit_handler" style="margin:0 5rem;">保存</button> 
+		     <button class="btn btn-default" @click="cancel" style="margin:0 5rem;">取消</button>
+		</div>
+		</div>
+		</div>
+		<modal-pop modal-title="操作提示" :modal_id="save_modal">
+			<p slot="body" style="margin:0 auto;text-align: center;" v-text="save_modal_txt"></p>
+		</modal-pop>
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+
+<script>
+	var scriptList=['./dist/header-footer.js','./dist/supervision-edit.js?timestamp='+(new Date().getTime())];
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/daterangepicker/moment.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+    	loadScript("assets/libs/jquery.blockUI.js"); 
+        loadScript("assets/libs/bootstrap.min.js");
+        loadScript("assets/libs/extendPagination.js");   
+        loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){        	 
+        	loadScript("./dist/main.js");
+        });
+    })
+</script>
+</body>
+</html>

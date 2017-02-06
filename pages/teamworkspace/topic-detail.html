@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link href="/assets/css/teamworkspace/teamworkspace.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/teamworkspace/openWorkspace.css" />
+    <title>讨论组详情</title>
+    <style>
+    .container {
+        /*width: 65rem;*/
+    }
+    
+    .content-table {
+        width: 100%;
+        /*border:1px solid lightgrey;*/
+    }
+    
+    .content-table tr {
+        border-bottom: 3px solid lightgrey;
+    }
+    
+    .content-table tr:last-child {
+        border-bottom: none;
+    }
+    
+    .user-info {
+        background: #fbfbfb;
+        width: 14%;
+        padding: 1rem;
+        text-align: center;
+    }
+    
+    .user-info .name {
+        font-weight: 700;
+        margin-top: 1rem;
+        padding-left: 5px;
+    }
+    
+    .user-info .name a {
+        color: Chocolate;
+        text-decoration: none;
+    }
+    
+    .user-face img {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+    }
+    
+    .posting {
+        padding: 2rem;
+        background: url("/assets/images/topic_background.jpg") repeat;
+        background-size: contain;
+    }
+    
+    .feedback {
+        padding: 2rem;
+        background: #fff;
+    }
+    
+    .topic-title {
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+    
+    .topic-content {
+        font-size: 1.4rem;
+        padding: 1rem 0;
+    }
+    
+    .date-from {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .S-txt2 {
+        color: #808080;
+        text-decoration: none;
+    }
+    
+    .floor_1 {
+        float: right;
+        background-color: #ff6927;
+        color: white;
+        padding: 2px 11px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    
+    .floors {
+        float: right;
+        background-color: gray;
+        color: white;
+        padding: 2px 11px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    
+    .detail .W-ficon {
+        float: right;
+    }
+    
+    .W-ficon img {
+        width: 2rem;
+        height: 2rem;
+    }
+    
+    .feed-handler {
+        border-top: 1px dotted #8F8F8F;
+        width: 100%;
+    }
+    
+    .feed-handler a {
+        cursor: pointer;
+        color: #8F8F8F;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+    }
+    
+    .feed-handler a:hover {
+        color: #f06a1c;
+    }
+    
+    .feedback-area {
+        background: #fff;
+        padding: 1rem 5px;
+    }
+    
+    .feedback-area textarea {
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <com-header></com-header>
+    </header>
+    <div class="container" id="subheading" style="border-top:0; width: 100%; margin-top:2rem;">
+        <div style="float: left;">
+            <label for="exampleInputFile">中国核电ECM二期项目PMO</label>
+        </div>
+    </div>
+    <!-- 主要内容   开始 -->
+    <div class="container" id="main-content" style="width:100%;">
+        <!-- 左边内容  开始 -->
+        <div class="main-content-left" id="mainContentLeft">
+            <img src="/assets/images/teamworkspace/u208.png" class="img-responsive" alt="Cinque Terre">
+            <!-- 管理员  开始 -->
+            <div style="padding-bottom: 20px; width: 100%;">
+                <div class="co-leftDiv-doc-title">
+                    <div class="co-leftDiv-doc-title-bgLine">
+                        <span class="co-leftDiv-doc-title-char">管理员</span>
+                    </div>
+                </div>
+                <div class="img-u164" id="mangerimg">
+                </div>
+            </div>
+            <!-- 管理员  结束 -->
+            <!-- 管理员职责  开始 -->
+            <div class="obligation" style="width: 100%;">
+                <!-- <div class="img-line-left01"></div>
+					<div style="float: left;">管理员职责</div>
+					<div class="img-line-left02"></div> -->
+                <div class="co-leftDiv-doc-title">
+                    <div class="co-leftDiv-doc-title-bgLine">
+                        <span class="co-leftDiv-doc-title-char">管理员职责</span>
+                    </div>
+                </div>
+                <div style="float: left; margin-left: 10px;">
+                    <p v-text="responsibility"></p>
+                </div>
+            </div>
+            <!-- 管理员职责  结束 -->
+            <!-- 社区制度  开始 -->
+            <div class="regime" style="float: left; width: 100%;">
+                <!-- <div class="img-line-left01"></div>
+					<div style="float: left;">社区制度</div>
+					<div class="img-line-left02"></div> -->
+                <div class="co-leftDiv-doc-title">
+                    <div class="co-leftDiv-doc-title-bgLine">
+                        <span class="co-leftDiv-doc-title-char">社区制度</span>
+                    </div>
+                </div>
+                <div style="float: left; margin-left: 10px;">
+                    <p v-text="collsystem"></p>
+                </div>
+            </div>
+            <!-- 社区制度  结束 -->
+        </div>
+        <!-- 左边内容  结束 -->
+        <!-- 中间内容  开始 -->
+        <div class="main-content-mid">
+            <table class="content-table" id="topicTable">
+                <tbody>
+                    <tr>
+                        <td class="user-info">
+                            <div class="user-face">
+                                <a>
+                                    <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/6aaeb4b8jw1e8qgp5bmzyj2050050aa8.jpg" alt="创建人">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a v-text="createUsername"></a>
+                            </div>
+                        </td>
+                        <td class="posting">
+                            <div class="topic-title" v-text="topicTitle">
+                            </div>
+                            <div class="date-from">
+                                <span class="S-txt2" v-text="createTime"></span>
+                                <div class="floor_1">1楼</div>
+                            </div>
+                            <div class="topic-content" v-text="topicContent">
+                            </div>
+                            <div class="feed-handler">
+                                <a href="#feedbackArea" @click="feedback">回复</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr v-for="item in comments">
+                        <td class="user-info">
+                            <div class="user-face">
+                                <a>
+                                    <img src="http://tva4.sinaimg.cn/crop.0.0.180.180.50/6aaeb4b8jw1e8qgp5bmzyj2050050aa8.jpg" alt="创建人">
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a v-text="item.commentusername"></a>
+                            </div>
+                        </td>
+                        <td class="feedback">
+                            <div class="date-from">
+                                <span class="S-txt2" v-text="item.createTime"></span>
+                                <div class="floors">{{$index+2}}楼</div>
+                            </div>
+                            <div class="feed-content" v-text="item.commentContent">
+                            </div>
+                            <div class="feed-handler">
+                                <a href="#feedbackArea" @click="feedback(item,$index+2)">回复</a>
+                                <a v-if="isAdmin||(userid==item.commentuserid)" style="float: right;margin-right: 2rem;" @click="bfDelete($index)">删除</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="feedback-area">
+                            <textarea class="form-control" id="feedbackArea" rows="3"></textarea>
+                            <button @click="submit" style="float: right;margin: 1rem 3rem ;" class="btn btn-warning">回复</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 中间内容  结束 -->
+        <!-- 右边内容  开始 -->
+        <div style="float: left;" id="main-content-right">
+            <!-- 成员   开始 -->
+            <div class="member" id="empimgerurl">
+                <!-- <div class="img-line-right01" ></div>
+					<div style="float: left;">成员</div>
+					<div class="img-line-right02" ></div> -->
+                <div class="co-leftDiv-doc-title">
+                    <div class="co-leftDiv-doc-title-bgLine">
+                        <span class="co-leftDiv-doc-title-char">成员</span>
+                    </div>
+                </div>
+                <div style="padding-left: 5px;" id="teamMembersDiv">
+                </div>
+                <div style=" padding-top: 10px; padding-left: 10px;">
+                    <a style=" font-size: 12px;" id="empcount">查看全部(0人)</a>
+                </div>
+            </div>
+            <!-- 成员   结束 -->
+            <!-- 相关协作空间   开始 -->
+            <div style="padding-top:2px;">
+                <div class="co-leftDiv-doc-title">
+                    <div class="co-leftDiv-doc-title-bgLine">
+                        <span class="co-leftDiv-doc-title-char">相关协作空间</span>
+                    </div>
+                </div>
+                <div style="float: left; margin-top:0.5rem;" class="workspace-img">
+                    <div class="con" style="line-height: 40px; padding-left: 10px; margin-left: 0.5rem; width:100%;">
+                        <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                        <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                    </div>
+                    <div class="con" style="line-height: 40px; padding-left: 10px;margin-left: 0.5rem; width:100%;">
+                        <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                        <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                    </div>
+                    <div class="con" style="line-height: 40px; padding-left: 10px;margin-left: 0.5rem; width:100%;">
+                        <img src="/assets/images/teamworkspace/u208.png" class="img-responsive">
+                        <span style="float:left; margin-left:1rem;">福清核电ECM项目</span>
+                    </div>
+                    <div style="padding-top: 10px; padding-left: 10px; width:100%;">
+                        <a style="font-size: 12px;">查看全部(8)</a>
+                    </div>
+                </div>
+            </div>
+            <!-- 相关协作空间   结束 -->
+        </div>
+        <!-- 右边内容  结束 -->
+    </div>
+    <!-- 主要内容   开始 -->
+    </div>
+    <div class="modal fade" id="alertModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">操作提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p style="width: 100%;text-align: center;" id="messageTxt">回复成功！</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="confirmHandler()" id="confirmBtn">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <footer>
+        <com-footer></com-footer>
+    </footer>
+    <script src="/assets/libs/vue.min.js"></script>
+    <script src="/assets/libs/jquery.min.js"></script>
+    <script src="/assets/libs/bootstrap.min.js"></script>
+    <script src='/dist/main-override.js'></script>
+    <script>
+    var topicVm=null;
+    function renderBody() {
+        //
+        var twsRequest=window.interfaceSettings.teamworkspaceRequest;
+        topicVm = new Vue({
+            el: "#topicTable",
+            data: {
+                id: null,
+                createUsername: "",
+                creatorImgpath: "",
+                createTime: "",
+                topicContent: "",
+                topicTitle: "",
+                comments: [],
+                admins: [],
+                superAdmin: null,
+                isAdmin:false,
+                userid:null,
+                operatingIndex:0
+            },
+            created: function() {
+                var fromPage = getQueryString("from");
+                if (fromPage == "teamworkspace") {
+                    var dataFromSpace = JSON.parse(sessionStorage.getItem("dataFromSpace"));
+                    this.id = dataFromSpace.id;
+                    this.admins = dataFromSpace.admins;
+                    this.superAdmin = dataFromSpace.superAdmin;
+                    this.isAdmin=dataFromSpace.isAdmin;
+                    window.loginUser=dataFromSpace.loginUser;
+                    this.userid=dataFromSpace.loginUser.userid;
+                    $("#mainContentLeft").html(dataFromSpace.lefthtml);
+                    $("#main-content-right").html(dataFromSpace.righthtml);
+                    initializeListner();
+                    var self = this;
+                    $.ajax({
+                        url: twsRequest.api.topicDetails + dataFromSpace.id,
+                        type: "get",
+                        success: function(result) {
+                            for (var key in result)
+                                self[key] = result[key];
+                            self.comments = result.comments ? result.comments : [];
+                        },
+                        error: function(error) {
+                            if (console) console.log("error", error);
+                        }
+                    });
+                }
+
+            },
+            ready: function() {},
+            methods: {
+                feedback(item, index) {
+                    index = index ? index : 1;
+                    var prefix = "回复" + index + "楼: ";
+                    $("#feedbackArea").val(prefix);
+                },
+                submit: function() {
+                    var self = this;
+                    var feedbackContent = $("#feedbackArea").val().trim();
+                    if (feedbackContent != "") {
+                        var feedback = {
+                            "commentContent": feedbackContent,
+                            "commentuserid": "20107728",
+                            "commentusername": "陈龙",
+                            "topicid": this.id
+                        }
+                        $.ajax({
+                            url: twsRequest.api.comment,
+                            type: "post",
+                            contentType: "application/json",
+                            data: JSON.stringify(feedback),
+                            success: function(result) {
+                                //
+                               $("#confirmBtn").hide();
+			                	$("#messageTxt").text("回复成功！");
+			                	$("#alertModal").modal("show");
+                                self.comments.push(result);
+                                $("#feedbackArea").val("");
+                            },
+                            error: function(err) {
+                                if (console) console.log("error", err);
+                            }
+                        });
+                    }
+                },
+                // delete feedback
+                bfDelete:function(index){
+                	this.operatingIndex=index;
+                	$("#confirmBtn").show();
+                	$("#messageTxt").text("确定要删除此回复？");
+                	$("#alertModal").modal("show");
+                },
+                afterConfirm:function(){
+                	var item=this.comments[this.operatingIndex];
+                	var self=this;
+                	$.ajax({
+                		url:twsRequest.api.deleteComment.replace("{id}",item.id),
+                		type:"post",
+                		success:function(result){
+                			alert("删除成功");
+                			self.comments.splice(self.operatingIndex,1);
+                		},
+                		error:function(err){
+                			if(console)console.log("error",err);
+                		}
+                	});
+                }
+            }
+
+
+        });
+
+    }
+
+        var memberList = [];
+    function initializeListner() {
+        $(function(argument) {
+            //
+            $(document).on("click", "#memberCollapse", function() {
+                if (memberList.length == 0) {
+                    var memberArray = $("#main-content-right").find("div.user-list");
+                    memberArray.each(function(index, item) {
+                        if (index > 2)
+                            memberList.push($(item));
+                    });
+                }
+
+                if ($(this).text() == "收起") {
+                    $(this).text("查看全部(" + (memberList.length + 3) + ")人");
+                    for (var i in memberList) {
+                        memberList[i].hide();
+                    }
+                } else {
+                    $(this).text("收起");
+                    $.each(memberList, function(dx, item) {
+                        item.show();
+                    });
+                }
+            });
+        });
+    }
+    function confirmHandler(){
+    	topicVm.afterConfirm();
+    }
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        } else {
+            return null;
+        }
+    }
+    </script>
+</body>
+
+</html>

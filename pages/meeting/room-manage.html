@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"></title>
+        <title>会议室管理</title>      
+        <link rel="stylesheet" href="/supervision_ui/assets/css/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="/supervision_ui/assets/css/daterangepicker.css">
+        <link rel="stylesheet" href="/supervision_ui/assets/css/fullcalendar.css">
+        <link rel="stylesheet" href="/supervision_ui/assets/css/schedule/style.css">
+    </head>
+    <body ng-app="meetingApp">
+    <header>    
+        <com-header></com-header>
+       
+    </header>
+
+    <div ng-controller="RoomCtrl"  class="content-border">
+     <style scoped>
+     .room-section{
+        width: 84rem;
+     }
+            .left-room{
+                float: left;
+                width: 15%;
+                border:1px solid #ddd;
+                margin-top: 25px;
+                padding-top: 1rem;
+            }
+            .left-room ul{list-style: none;
+                border-top: 1px solid #f1edf7;
+                border-bottom: 1px solid #f1edf7;
+                overflow-y: scroll;
+                max-height: 70rem;
+                padding-top: 5px;
+            }
+            .left-room .title{
+                margin-bottom: 1rem;
+            }
+            .left-room .list-item{
+                /*background: #00a2e5;*/
+                width: 100%;
+                padding-bottom:5px;
+            }
+            .left-room .room-item{
+                cursor: pointer;
+            }
+            .left-room .room-item:hover{
+                background: #00a2e5;
+            }
+            .room-item:visited{
+                color:#00a2e5;
+            }
+            .calendar{
+                float: left;
+                width: 85%;
+            }
+        </style>
+        <!-- 模态框（Modal） -->
+<div class="modal fade" id="roomSelectModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width: 90rem;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center">
+                    会议室管理
+                </h4>
+            </div>
+            <div class="modal-body">
+            <section class="room-section">
+                  <div class="left-room" >
+                <p class="title">会议室列表</p>
+                    <ul>
+                         <li class="list-item">
+                            <a class="form-control room-item">208</a>
+                        </li>
+                         <li class="list-item">
+                            <a class="form-control room-item">208</a>
+                        </li>
+                         <li class="list-item">
+                            <a class="form-control room-item">208</a>
+                        </li>
+                         <li class="list-item">
+                            <a class="form-control room-item">208</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id='calendar'  class="calendar"></div>
+            </section>
+              
+            </div>
+            <div class="modal-footer; text-center" style="margin: 10px;">
+                <button type="button" class="btn btn-primary" ng-click="peopleConfig()">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+        
+    </div>
+
+
+    <footer><com-footer></com-footer></footer>
+        <script src="/supervision_ui/assets/libs/angular/angular.min.js"></script>
+        <script src="/supervision_ui/assets/libs/jquery.min.js"></script>
+        <script src="/supervision_ui/assets/libs/bootstrap/bootstrap.min.js"></script>
+        <script src="/supervision_ui/assets/libs/accordion.js"></script>
+        <script src="/supervision_ui/assets/libs/daterangepicker/moment.min.js"></script>
+        <script src="/supervision_ui/assets/libs/daterangepicker/daterangepicker.js"></script>
+        <script src='/supervision_ui/assets/libs/fullcalendar.js'></script>
+        <script src='/supervision_ui/assets/libs/jquery.blockUI.js'></script>
+        <script src="/supervision_ui/assets/libs/vue.min.js"></script>
+        <script src="/supervision_ui/assets/libs/ajaxfileupload.js"></script>
+        <script src='/supervision_ui/src/meeting/meeting-service.js'> </script>
+        <script src='/supervision_ui/src/meeting/room-management.js'></script>
+       <!--  <script>
+            var scriptList=['/dist/header_footer.js'];
+        </script>
+        <script src="/dist/main.js"></script> -->
+        <script src="/supervision_ui/dist/main-override.js"></script>
+    </body>
+</html>

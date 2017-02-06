@@ -1,0 +1,1152 @@
+<html lang="zh-CN"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="apploication/json">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>督办管理-我的督办</title>
+     <base id="baseTag" href="http://127.0.0.1:8008/">
+    <script>
+    function loadCss(path){
+        if(!path || path.length === 0){
+                    throw new Error('argument "path" is required !');
+                }
+            // var head = document.getElementsByTagName('head')[0];
+            var link = document.createElement('link');
+            link.href = path;
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+     }
+        document.getElementById("baseTag").href=location.protocol+"//"+location.host+"/"; 
+        loadCss("assets/css/bootstrap.min.css");
+        loadCss("assets/css/daterangepicker.css");
+        loadCss("assets/css/supervision.css");
+     function loadScript(url,callback){
+        callback=callback?callback:function(){};
+        var script=document.createElement("script"); 
+        if(script.readyState){//IE
+         script.onreadystatechange=function(){ 
+        if(script.readyState=="loaded"||script.readyState=="complete"){
+        script.onreadystatechange=null; callback(); } };
+        }else{//其他浏览器
+        script.onload=function(){ callback(); }; } script.src=url; 
+        document.body.appendChild(script);
+    }
+
+     
+    </script><link href="assets/css/bootstrap.min.css" rel="stylesheet"><link href="assets/css/daterangepicker.css" rel="stylesheet"><link href="assets/css/supervision.css" rel="stylesheet">  
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">/*
+ * Swiper 2.7.6
+ * Mobile touch slider and framework with hardware accelerated transitions
+ *
+ * http://www.idangero.us/sliders/swiper/
+ *
+ * Copyright 2010-2015, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us/
+ *
+ * Licensed under GPL & MIT
+ *
+ * Released on: February 11, 2015
+*/
+/* ===============================================================
+Basic Swiper Styles 
+================================================================*/
+.swiper-container {
+	margin:0 auto;
+	position:relative;
+	overflow:hidden;
+	direction:ltr;
+	-webkit-backface-visibility:hidden;
+	-moz-backface-visibility:hidden;
+	-ms-backface-visibility:hidden;
+	-o-backface-visibility:hidden;
+	backface-visibility:hidden;
+	/* Fix of Webkit flickering */
+	z-index:1;
+}
+.swiper-wrapper {
+	position:relative;
+	width:100%;
+	-webkit-transition-property:-webkit-transform, left, top;
+	-webkit-transition-duration:0s;
+	-webkit-transform:translate3d(0px,0,0);
+	-webkit-transition-timing-function:ease;
+	
+	-moz-transition-property:-moz-transform, left, top;
+	-moz-transition-duration:0s;
+	-moz-transform:translate3d(0px,0,0);
+	-moz-transition-timing-function:ease;
+	
+	-o-transition-property:-o-transform, left, top;
+	-o-transition-duration:0s;
+	-o-transform:translate3d(0px,0,0);
+	-o-transition-timing-function:ease;
+	-o-transform:translate(0px,0px);
+	
+	-ms-transition-property:-ms-transform, left, top;
+	-ms-transition-duration:0s;
+	-ms-transform:translate3d(0px,0,0);
+	-ms-transition-timing-function:ease;
+	
+	transition-property:transform, left, top;
+	transition-duration:0s;
+	transform:translate3d(0px,0,0);
+	transition-timing-function:ease;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+	-webkit-transition-timing-function: ease-out;
+	-moz-transition-timing-function: ease-out;
+	-ms-transition-timing-function: ease-out;
+	-o-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+.swiper-slide {
+	float: left;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+	-ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+	-ms-touch-action: pan-x;
+}
+
+/* ===============================================================
+Your custom styles, here you need to specify container's and slide's
+sizes, pagination, etc.
+================================================================*/
+.swiper-container {
+	/* Specify Swiper's Size: */
+
+	/*width:200px;
+	height: 100px;*/
+}
+.swiper-slide {
+	/* Specify Slides's Size: */
+	
+	/*width: 100%;
+	height: 100%;*/
+}
+.swiper-slide-active {
+	/* Specific active slide styling: */
+	
+}
+.swiper-slide-visible {
+	/* Specific visible slide styling: */	
+
+}
+/* ===============================================================
+Pagination Styles
+================================================================*/
+.swiper-pagination-switch {
+	/* Stylize pagination button: */	
+
+}
+.swiper-active-switch {
+	/* Specific active button style: */	
+	
+}
+.swiper-visible-switch {
+	/* Specific visible button style: */	
+	
+}
+</style><style type="text/css">
+*,article,section,ul,div,p,td,li{
+    margin: 0;padding: 0;
+}
+html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+body {font-size: 1.4rem;/*1.4 × 10px = 14px */
+    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+    min-width: 1024px;   
+    max-width: 80%;    
+    margin: 0 auto;
+}
+
+h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+
+
+/*顶部导航开始*/
+.navbar{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.navbar .container-fluid{
+    position: relative;
+    padding: 0;
+    background: #ffffff;
+}
+.brand{
+    float: left;
+    width: 25.8rem;
+    height: 5.2rem;
+}
+
+.nav-list{
+    list-style: none;
+    float: left;
+    border-left: 1px solid lightgrey;
+    font-size: 14px;
+    font-weight: 400;
+    color: #797979!important;
+    cursor: pointer;
+}
+.navbar-link.com-portal:hover{
+    background: #00a2e5;
+    color: #ffffff;
+}
+.dep-portal:hover{
+    background: #FFB341;
+    color: #ffffff;
+}
+.navbar-link.workbench:hover{
+    background: #ABCB27;
+    color: #ffffff;
+}
+/*.navbar-link */
+.workbench .glyphicon:before{
+    position: absolute;
+    top: -2rem;
+    color: red;
+    content: "\25CF";
+    font-size: "1px";
+
+}
+.navbar-link{
+    display: inline-block;
+    height: 100%;
+    position: relative;
+    padding:0 3rem;
+    color: #797979;
+    width: 100%;
+}
+
+.nav-list .navbar-link:hover{
+    color: #ffffff;
+    text-decoration: none;
+
+}
+.nav-list .active{
+    color: #0066cc;
+}
+.nav-list-item{
+    float: left;
+    border-right: 1px solid lightgrey;
+    line-height: 5.2rem;
+    text-align: center;
+    min-width: 15rem;
+}
+.user-container{
+    border-left: none;text-align: center;width: 17rem;float: right;
+} @media screen and (min-width:1024px) and (max-width: 1235px){
+     .nav-action .search{
+        padding-right: 22px!important;
+    }
+}
+@media screen and (min-width:1350px) and (max-width: 1400px){
+     body{
+        max-width: 85%;
+}
+}
+ @media screen and (min-width:1024px) and (max-width:1350px){
+ .nav-list-item{
+    float: left;
+    border-right: 1px solid lightgrey;
+    line-height: 5.2rem;
+    text-align: center;
+    width: auto;
+    min-width: 0!important;
+}
+.navbar-link{
+    padding: 0 2rem;
+}
+.nav-action .search{
+    min-width: 0!important;
+    border-right: none;
+}
+.user-container{
+width: 16rem;
+}
+}
+.nav-action{
+    /*border: 1px solid blue;*/
+   float: right;
+    line-height: 3.2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: grey;
+    margin-right:10px;
+}.nav-action::after{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    content: "";
+}
+.nav-action .login{
+    min-width:12rem;
+    text-align: center;
+}
+.nav-action .search{
+    border-left: solid 1px lightgrey;
+    text-align: center;
+    min-width: 0!important;
+}
+.nav-action .form-control{
+    display: inline;
+    width: 12rem;
+}
+.nav-action .search{
+    padding-left:5%;
+    padding-right: 5%;
+    border-right: none!important;
+}
+.search input{width: 70%;}
+.user{
+overflow: hidden;
+height: 4.2rem;
+}
+.nav-link{
+    position: relative;
+}
+.nav-panel{
+    background-color: white;
+    display: none;
+    left: 0;
+    top: 0;
+    position: absolute;
+    margin-top: 5.2rem;
+    width: 100%;
+    height: 16.5rem;
+    z-index: 1030;
+    font-size: 14px;
+    font-weight: 400;
+    color: #797979!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
+    border: 1px solid lightgrey;
+    overflow: hidden;
+}
+.nav-panel .title{
+        margin-bottom: -2rem;
+}
+
+.nav-panel ul{
+    padding: 0 2rem;
+    list-style: none;
+}
+
+.nav-panel .list-item{
+    float: left;
+    width: 14%;
+    text-align: center;
+    margin-bottom: -1.5rem;
+}
+.company .btn:hover{
+    background-color: #00a2e5;
+    color:#fff
+}
+.dept-subj .btn:hover{
+    background-color: #FFB341;
+    color:#fff
+}
+.dept-subj .list-item{
+    width: 25%;
+}
+
+
+.list.dept{
+    position: relative;
+}
+.dept .split{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 16.4rem;
+    border-right: 1px solid lightgrey;
+}
+/*顶部导航结束*/
+/*logo*/
+.logo{
+    width: 100%;
+    padding: 1px;
+    height: 16.5rem;
+}
+/*logo end*/
+</style><style type="text/css">
+    
+/*----底部样式-----*/
+.footer[_v-01a3a292]{ background-color:#6a7986; height:95px; margin-top: 2rem;}
+.footer_content[_v-01a3a292]{ width:490px; margin:0 auto; padding-top:10px; color:#fff;}
+.sina[_v-01a3a292]{ width:58px; height:65px; text-align:center; float:left; font-size:12px; position: relative; }
+.con[_v-01a3a292]{ width:245px; float:left; text-align:center; margin:0 0 0 60px;}
+.weixin[_v-01a3a292]{ height:65px; text-align:center; float:right; font-size:12px; position: relative;}
+.fade-in[_v-01a3a292]{
+    position: absolute;
+    bottom: -1rem;
+    left: -7rem;
+    z-index: 1000;
+    display: none;
+    padding-right: 1rem;
+}
+/***************************************end***********************************/
+</style></head>
+<body>
+<!--head-->
+<header>
+    <div class="navbar navbar-default">
+    <div class="container-fluid nav-header">
+        <img class="brand" src="/assets/images/portal/brand_big.png">
+
+        <div class="nav-link" id="navLink">
+            <ul class="nav-list">
+                <li class="nav-list-item" id="comPortalNav">
+                    <a class="navbar-link com-portal" href="/pages/portal/index.html">公司门户▼</a>
+
+                    <div class="nav-panel company">
+                        <div class="title">公司门户
+                               <!--  <div style="position:absolute;top: 0;right:1rem;">
+                                 <a @click="turnMenuPage('company','left')" :class="['btn','glyphicon','glyphicon-arrow-left',{'disabled':companyCount<=21}]" ></a>
+                                 <a @click="turnMenuPage('company','right')" :class="['btn','glyphicon','glyphicon-arrow-right',{'disabled':companyCount==companyOrigin.length}]" ></a>
+                                 </div> -->
+                            </div>
+                           <!--  <ul v-for="n in (parseInt(companys.length/7)+(companys.length%7==0?0:1))">
+                                <li v-for="m in n<parseInt(companys.length/7)?7:(companys.length%7)" class="list-item">
+                                    <a class="btn" v-text="companys[n*7+m].name" :href="companys[n*7+m].webtype=='0'?('pages/portal/index.html?type='+companys[n*7+m].hptype+'&node='+companys[n*7+m].id):companys[n*7+m].url" target="_blank"></a>
+                                </li>
+                            </ul> -->
+                        <ul class="list">
+                            <!-- href="http://bjportal.cnnp.com.cn/wps/portal" -->
+                            <li class="list-item"><a class="btn" href="http://bjecm.cnnp.com.cn/newportal/news/home.action" target="_blank">中国核电旧主页</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="http://www.cnnc.com.cn" target="_blank">中国核工业集团公司</a></li>
+                            <!-- /.list-item -->
+                             <li class="list-item"><a class="btn" href="http://10.16.15.38:10039/wps/portal/Home/cnnc_index" target="_blank">秦山(筹)</a></li>
+                            <li class="list-item"><a class="btn" href="http://10.16.15.38" target="_blank">中核运行</a></li>
+                            <!-- /.list-item -->
+                           
+                            <!-- /.list-item -->
+                           
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="#" target="_blank">江苏核电</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="#" target="_blank">三门核电</a></li>
+                            <!-- /.list-item -->
+                        </ul>
+                        <ul>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="http://fqecm.cnnp.com.cn/wps/portal" target="_blank">福清核电</a></li>
+                            <li class="list-item"><a class="btn" href="#" target="_blank">海南核电</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="#" target="_blank">桃花江核电</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="http://lnecm.cnnp.com.cn/wps/portal" target="_blank">辽宁核电</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="http://fsecm.cnnp.com.cn/wps/portal" target="_blank">三明核电</a></li>
+                            <!-- /.list-item -->
+                            <li class="list-item"><a class="btn" href="http://zgecm.cnnp.com.cn/wps/portal" target="_blank">漳州核电</a></li>
+                             <li class="list-item"><a class="btn" href="http://hbecm.cnnp.com.cn/hbnews/f" target="_blank">河北核电</a></li>
+                              <li class="list-item"><a class="btn" href="#" target="_blank">霞浦核电</a></li>
+                            <li class="list-item"><a class="btn" href="http://10.15.251.136:8080/cnnews/f" target="_blank">中浙能源</a></li>
+                            <!-- /.list-item -
+                            <li class="list-item">&nbsp;</li>
+                            <!-- /.list-item -->
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-list-item dept-subj" id="depPortalNav">
+                    <a class="navbar-link dep-portal">部门及专题门户▼</a>
+
+                    <div class="nav-panel row">
+                        <div class="list dept col-md-6">
+                            <div class="title">部门门户
+                                <div style="position:absolute;top: 0;right:1rem;">
+                                 <a class="btn glyphicon glyphicon-arrow-left disabled"></a>
+                                 <a class="btn glyphicon glyphicon-arrow-right"></a>
+                                 </div>
+                            </div>
+                            <!-- /.title -->
+                           
+                            <ul>
+                                <li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17042">总经理工作部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17062">计划发展部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17143">战略研究室</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17063">市场开发部</a>
+                                </li>
+                            </ul><ul>
+                                <li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17061">工程建设部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17060">运行生产部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17059">国际业务部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17057">人力资源部</a>
+                                </li>
+                            </ul><ul>
+                                <li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17058">财务资产部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17056">商务合同部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17055">安全质量部</a>
+                                </li><li class="list-item">
+                                    <a class="btn" target="_blank" href="pages/portal/index.html?type=1&amp;node=17053">党群工作部</a>
+                                </li>
+                            </ul> 
+                            <div class="split"></div>  
+                        </div>
+                        <!-- /.list -->
+                        <div class="list col-md-6">
+                            <div class="title">专题门户
+                                <div style="position:absolute;top: 0;right:1rem;">
+                                     <a class="btn glyphicon glyphicon-arrow-left disabled"></a>
+                                     <a class="btn glyphicon glyphicon-arrow-right disabled">
+                                     </a>
+                                </div>
+                            </div>
+                            <!-- /.title -->
+                            <ul>
+                                <li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.16.15.79/bookinfo/default.aspx">图书情报</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.16.15.79/tel/">通讯录</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://mail.cnnp.com.cn">邮箱系统</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://wfet.cnnp.com.cn/Standard">标准体系</a>
+                                </li>
+                            </ul><ul>
+                                <li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.16.85:8085/eLearning/index.jsp">基本安全授权</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://bjecm.cnnp.com.cn/publish2/">信息发布</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://wfks.cnnp.com.cn/">知识服务</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.16.85:8088/cnnpoe/">经验反馈</a>
+                                </li>
+                            </ul><ul>
+                                <li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.16.85:8081/CNNPIS/servlet/wanoServlet">WANO指标</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.16.85:8182/fgbzbs/index.jsp">法规标准</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.251.82:9081/">共管委</a>
+                                </li><li class="list-item">
+                                 <a class="btn" target="_blank" href="http://10.15.16.85:8399/hdzx/sitemap/">核电在线地图</a>
+                                </li>
+                            </ul>  
+                        </div>
+                        <!-- /.list -->
+                    </div>
+                </li>
+                <li class="nav-list-item"><a class="navbar-link workbench">个人工作台</a></li>
+                
+            </ul>
+        </div>
+        <!-- /.nav-link -->
+
+        <div class="nav-action" id="nav-action">
+            <div class="nav-list-item search"><input type="text" class="form-control" placeholder="搜索">
+               
+            </div>
+            <!-- <li class="nav-list-item login"><a :href="f2000"></a></li> -->
+        </div>
+            <iframe id="logoutIframe" hidden="hidden"></iframe>
+             <div style="line-height: 4.2rem; float: right;border-left: 1px solid lightgrey;"> 
+                    <a href="http://w3.cnnp.com.cn/pages/portal/news_more.html?type=17149&amp;column=新门户帮助文档" class="btn" style="line-height: 3.8rem;" target="_blank">帮助</a>                      
+             </div>
+              <div class="user-container" style="border-left: 1px solid lightgrey;">          
+                 <div class="user" style="float: left;width: 60%;line-height: 4.2rem;text-align: right;border-right: 1px solid lightgrey;margin: 5px 0;text-align: center;">谢波</div>
+                         <div class="logout" style="text-align: center;float: left;width: 40%;line-height: 4.2rem;text-align: left;margin: 5px 0;">
+                         <a class="btn">登出</a>
+                     </div>
+              </div>
+               
+              
+         
+    </div>
+    <!-- /.container -->
+
+    <!-- /.nav-panel -->
+</div>
+<div class="swiper-container" style="width: 100%;" id="swiper1481804629791">
+    <div class="swiper-wrapper" style="width: 5120px; transform: translate3d(-4096px, 0px, 0px); transition-duration: 2s; height: 182px;"><div class="swiper-slide swiper-slide-duplicate" style="width: 1024px; height: 182px;">
+            <img class="logo" src="/assets/images/portal/portal-logo2.jpg">
+        </div>
+        <div class="swiper-slide" style="width: 1024px; height: 182px;">
+            <img class="logo" src="/assets/images/portal/portal-logo0.jpg">
+        </div><div class="swiper-slide" style="width: 1024px; height: 182px;">
+            <img class="logo" src="/assets/images/portal/portal-logo1.jpg">
+        </div><div class="swiper-slide" style="width: 1024px; height: 182px;">
+            <img class="logo" src="/assets/images/portal/portal-logo2.jpg">
+        </div>
+    <div class="swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-active" style="width: 1024px; height: 182px;">
+            <img class="logo" src="/assets/images/portal/portal-logo0.jpg">
+        </div></div>
+</div>
+</header>
+<!--head end-->
+<article>
+    <section>
+
+        <div role="tabpanel" class="tab-pane fade in active">           
+            <div class="btn-group" role="group" aria-label="..." style="margin-top: 1rem;">
+                督办管理
+                  &gt;<a type="button">我的督办</a>
+            </div>
+
+            <img class="horizontal-line" src="../../assets/images/hori-line.png">
+             <div class="statistics">
+             <style scoped="">
+             .statistics-content{
+                margin-top: -3px;
+             }
+             </style>
+                <div class="statistics-content">
+                    <p class="statistics-data" id="completedRateStatistics">6/14</p>
+                    <p class="statistics-title">完成情况统计</p>
+                </div>
+            </div>
+            <section class="inner-tab ">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" class="active"><a>我的督办</a></li>
+                    <li role="presentation"><a href="pages/supervision/supervision-all.html">全部督办</a></li>
+                    <li role="presentation"><a href="pages/supervision/supervision-edit.html">新建督办</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-panel fade in active">
+                        <p class="tip"><span>展示与您相关的督办信息，包括您作为发起人和责任人的督办任务。</span></p>
+                        <section id="filterSection">
+                            <div class="filter">
+                                <ul class="filter-item filter-time" id="datePicker">
+                                    <li class="item-title" style="text-align: center;">计划完成时间：</li>
+                                    <!--  <li v-for="n in 4"><a :class="['btn',{'btn-success':}]" data-mark="all" @click="changeTime($event)">全部</a></li> -->
+
+                                    <li><a class="btn btn-success" data-mark="all">全部</a>
+                                    </li>
+                                    <li><a class="btn" data-mark="lastweek">上周</a></li>
+                                    <li><a class="btn" data-mark="thisweek">本周</a></li>
+                                    <li><a class="btn" data-mark="nextweek">下周</a></li>
+                                    <li class="date-select">
+                                        <input type="text" class="form-control" id="startDate" placeholder="请选择开始日期"><span>&nbsp;  到 &nbsp;</span>
+                                        <input type="text" class="form-control" id="endDate" placeholder="请选择结束日期">
+                                        <a class="btn btn-default " style="margin-left: 1.5rem;" data-mark="custom">时段</a>
+                                    </li>
+
+                                </ul>
+                                <ul class="filter-item filter-field clearfix">
+                                    <li class="item-title">领域：</li>
+                                    <li>
+                                        <a class="btn btn-success">全部</a>
+                                    </li><li>
+                                        <a class="btn">生产准备</a>
+                                    </li><li>
+                                        <a class="btn">生产计划</a>
+                                    </li><li>
+                                        <a class="btn">资产管理</a>
+                                    </li><li>
+                                        <a class="btn">运行</a>
+                                    </li><li>
+                                        <a class="btn">维修</a>
+                                    </li><li>
+                                        <a class="btn">大修</a>
+                                    </li>
+
+                                    <li class="more">
+                                        <!-- Single button -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                更多 <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu panel panel-default">
+                                                <li><a>设备管理</a></li><li><a>配置管理</a></li><li><a>核燃料管理</a></li><li><a>化学</a></li><li><a>安全分析与审查</a></li><li><a>科技管理</a></li><li><a>质量保证</a></li><li><a>核安全管理</a></li><li><a>人因管理</a></li><li><a>经验反馈</a></li><li><a>辐射防护</a></li><li><a>工业安全</a></li><li><a>职业健康</a></li><li><a>放射性废物管理</a></li><li><a>应急准备与响应</a></li><li><a>环境保护</a></li><li><a>消防</a></li><li><a>保卫</a></li><li><a>培训与授权</a></li><li><a>信息</a></li><li><a>文档</a></li><li><a>采购仓储</a></li><li><a>管理改进</a></li><li><a>人力资源</a></li><li><a>行政后勤</a></li><li><a>公共关系</a></li><li><a>财务</a></li><li><a>审计</a></li><li><a>党群</a></li><li><a>设计管理</a></li><li><a>工程管理</a></li><li><a>土建安装</a></li><li><a>调试</a></li><li><a>公司治理</a></li><li><a>企业文化</a></li><li><a>战略管理</a></li><li><a>经营计划与绩效管理</a></li><li><a>投资管理</a></li><li><a>商务管理</a></li><li><a>证券事务</a></li><li><a>成员公司治理</a></li><li><a>前期开发</a></li><li><a>组织管理</a></li><li><a>法律事务</a></li><li><a>纪检监察</a></li><li><a>风险管理</a></li><li><a>交叉领域</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="filter-item filter-field field-res">
+                                    <li class="item-title filter-res">督办来源：</li>
+                                    <li><a class="btn btn-success">全部</a></li><li><a class="btn">会议</a></li><li><a class="btn">计划</a></li><li><a class="btn">临时任务</a></li><li><a class="btn">流程督办</a></li><li><a class="btn">上下行文</a></li><li><a class="btn">协作空间</a></li>
+                                    
+                                </ul>
+                                <ul class="filter-item field-res">
+                                  <li class="item-title filter-res">会议分类：</li>
+                                  <li><a class="btn">股东会</a></li><li><a class="btn">监事会</a></li><li><a class="btn">董事会</a></li>
+                                </ul>
+                            </div>
+                          
+                        </section>
+                        <section class="grid-table container-fluid " id="result-section">
+
+                            <div class="key">
+                                <p>&nbsp;&nbsp;1.需重点关注的未完成督办事项（满足以下条件之一：a.一周内过期或已过期 b.重要程度≥4 c.紧急程度≥4）</p>
+                            </div>
+                            <!-- /.key -->
+                            <!-- /.table table-condensed -->
+                            <!-- /.row -->
+                                <table class="table table-hover table-condensed content-key datatable" id="keyList">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">
+                                            督办编号
+                                        </th><th class="sorting">
+                                            督办事项名称
+                                        </th><th class="sorting">
+                                            发起人(A)
+                                        </th><th class="sorting">
+                                            责任人(R)
+                                        </th><th class="sorting">
+                                            计划完成时间
+                                        </th><th class="sorting">
+                                            紧急程度
+                                        </th><th class="sorting">
+                                            重要程度
+                                        </th><th class="sorting">
+                                            最新进展
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="grid-content ">
+                                        <td>2016-PO-000260</td>
+                                         <td>
+                                          <style scoped="">
+                                          .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                            display: table-cell;
+                                            vertical-align: middle;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;display: table;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" href="/pages/supervision/supervision-detail.html?id=6108&amp;previous=mine">
+
+                                         <div class="display">责任人督办录入测试</div>
+                                            <div class="hoverInfo">责任人督办录入测试</div>
+                                         </a>
+                                         </td>
+                                        <td>20120036</td>
+                                        <td>谢波</td>
+                                        <td>2016-10-19</td>
+                                        <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" style="position: relative;">
+                                                <div class="progress">
+                                                    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar small-pro progress-bar-danger" aria-valuenow="12" style="width: 12%;">
+                                                        12%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">
+                                                </span>
+
+                                                <div class="hoverInfo" style="display: none;"></div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <form class="form-horizontal" style="width: 15rem;float: right;display: none;" id="keyPagesizeSelect">
+                                  <div class="form-group">
+                                    <label class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control pagesize" data-key="key"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                              
+                                <div class="pagination-outer" id="key-pagination"> <ul class="pagination"> <li class="previous"><a href="#">«</a></li><li class="disabled hidden"><a>...</a></li> <li class="active"><a href="#">1</a></li><li class="disabled hidden"><a>...</a></li><li class="next"><a href="#">»</a></li></ul></div>
+
+                                <!-- </div> -->
+                                <div class="key">
+                                    <p>&nbsp;&nbsp;2.其他未完成督办事项 (未完成的，不在以上表格中的事项）</p>
+                                </div>
+                                <table class="table table-hover table-condensed content-key" id="otherList">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">督办编号
+                                        </th><th class="sorting">督办事项名称
+                                        </th><th class="sorting">发起人(A)
+                                        </th><th class="sorting">责任人(R)
+                                        </th><th class="sorting">计划完成时间
+                                        </th><th class="sorting">紧急程度
+                                        </th><th class="sorting">重要程度
+                                        </th><th class="sorting">最新进展
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    
+
+                                    </tbody>
+                                </table>
+                                <form class="form-horizontal" style="width: 15rem;float: right;display: none;" id="otherPagesizeSelect">
+                                  <div class="form-group">
+                                    <label class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                     <select class="form-control pagesize" data-key="other"> 
+                                    <option value="3">3</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                                <div class="pagination-outer" id="other-pagination"></div>
+                                <div class="key" style="
+    font-size: 1rem;
+">
+                                    <p>&nbsp;&nbsp;3.近期已完成的督办事项（一个月内）</p>
+                                </div>
+                                <table class="table table-hover table-condensed content-key" id="doneList">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">督办编号
+                                        </th><th class="sorting">督办事项名称
+                                        </th><th class="sorting">发起人</th><th class="sorting">责任人</th><th class="sorting">责任部门
+                                        </th><th class="sorting">计划完成
+                                        </th><th class="sorting">紧急程度
+                                        </th><th class="sorting">重要程度
+                                        </th><th class="sorting">最新进展
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="grid-content ">
+                                        <td style="
+    font-size: x-small;
+">2016-PL-000256</td>
+                                       <td>
+                                          <style scoped="">
+                                          .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                            display: table-cell;
+                                            vertical-align: middle;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;display: table;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" href="/pages/supervision/supervision-detail.html?id=6104&amp;previous=mine">
+
+                                         <div class="display">测试IE撤销督办录入</div>
+                                            <div class="hoverInfo" style="display: none;">测试IE撤销督办录入</div>
+                                         </a>
+                                         </td>
+                                        <td>谢波</td>
+                                        <td>谢波</td>
+                                        <td>计划发展部</td><td style="
+    font-size: small;
+">2016-10-18</td>
+                                       <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" style="position: relative;">
+                                                <div class="progress">
+                                                    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar small-pro progress-bar-success" aria-valuenow="100" style="width: 100%;">
+                                                        100%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">
+                                                </span>
+
+                                                <div class="hoverInfo" style="display: none;">
+                                                </div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <form class="form-horizontal" style="width: 15rem; float: right; display: none;" id="donePagesizeSelect">
+                                  <div class="form-group">
+                                    <label class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                         <select class="form-control pagesize" data-key="done"> 
+                                            <option value="3">3</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                        </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                                 <div class="pagination-outer" id="done-pagination"> <ul class="pagination"> <li class="previous"><a href="#">«</a></li><li class="disabled hidden"><a>...</a></li> <li class="active"><a href="#">1</a></li><li class="disabled hidden"><a>...</a></li><li class="next"><a href="#">»</a></li></ul></div>  
+                                 <div class="key">
+                                    <p>&nbsp;&nbsp;4.所在部门督办事项</p>
+                                </div>
+                                <table class="table table-hover table-condensed content-key" id="orgList">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">督办编号
+                                        </th><th class="sorting">督办事项名称
+                                        </th><th class="sorting">发起人(A)
+                                        </th><th class="sorting">责任人(R)
+                                        </th><th class="sorting">计划完成时间
+                                        </th><th class="sorting">紧急程度
+                                        </th><th class="sorting">重要程度
+                                        </th><th class="sorting">最新进展
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="grid-content ">
+                                        <td>2016-PO-000298</td>
+                                       <td>
+                                          <style scoped="">
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                            display: table-cell;
+                                            vertical-align: middle;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;display: table;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" href="/pages/supervision/supervision-detail.html?id=8104&amp;previous=mine">
+
+                                         <div class="display">组织督办测试</div>
+                                            <div class="hoverInfo" style="display: none;">组织督办测试</div>
+                                         </a>
+                                         </td>
+                                        <td>谢波</td>
+                                        <td></td>
+                                        <td>2016-12-15</td>
+                                       <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" style="position: relative;">
+                                                <div class="progress">
+                                                    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar small-pro progress-bar-danger" aria-valuenow="0" style="width: 0%;">
+                                                        0%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">
+                                                </span>
+
+                                                <div class="hoverInfo" style="display: none;">
+                                                </div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr><tr class="grid-content ">
+                                        <td>2016-PL-000297</td>
+                                       <td>
+                                          <style scoped="">
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                            display: table-cell;
+                                            vertical-align: middle;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;display: table;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" href="/pages/supervision/supervision-detail.html?id=8103&amp;previous=mine">
+
+                                         <div class="display">组织督办测试</div>
+                                            <div class="hoverInfo">组织督办测试</div>
+                                         </a>
+                                         </td>
+                                        <td>谢波</td>
+                                        <td></td>
+                                        <td>2016-12-15</td>
+                                       <td>
+                                            <div class="level" style="background-color: rgb(92, 184, 92);">3</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" style="background-color: rgb(240, 173, 78);">4</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" style="position: relative;">
+                                                <div class="progress">
+                                                    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar small-pro progress-bar-danger" aria-valuenow="0" style="width: 0%;">
+                                                        0%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">
+                                                </span>
+
+                                                <div class="hoverInfo">
+                                                </div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr><tr class="grid-content ">
+                                        <td>2016-PO-000280</td>
+                                       <td>
+                                          <style scoped="">
+                                         .display{
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+                                            display: table-cell;
+                                            vertical-align: middle;
+                                         }
+                                         .hoverInfo{
+                                            top: 0;
+                                            height: auto;
+                                         }
+                                         </style>
+                                         <a style="position: relative;display: table;" onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" class="item-name" href="/pages/supervision/supervision-detail.html?id=7157&amp;previous=mine">
+
+                                         <div class="display">子项一</div>
+                                            <div class="hoverInfo">子项一</div>
+                                         </a>
+                                         </td>
+                                        <td>谢波</td>
+                                        <td></td>
+                                        <td>2016-12-06</td>
+                                       <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div class="level" style="background-color: gray;">1</div>
+                                        </td>
+                                        <td>
+                                            <div onmouseover="hoverFunction(this)" onmouseout="outFunction(this)" style="position: relative;">
+                                                <div class="progress">
+                                                    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" class="progress-bar small-pro progress-bar-danger" aria-valuenow="24" style="width: 24%;">
+                                                        24%
+                                                    </div>
+                                                </div>
+                                                <span style="display: block;width: 100%;height: 4rem;overflow-y: hidden;">
+                                                </span>
+
+                                                <div class="hoverInfo" style="display: none;">
+                                                </div>
+                                                <!-- /.hoverInfo -->
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <form class="form-horizontal" style="width: 15rem;float: right;" id="orgPagesizeSelect">
+                                  <div class="form-group">
+                                    <label class="col-sm-5 control-label">条数</label>
+                                    <div class="col-sm-7">
+                                         <select class="form-control pagesize" data-key="org"> 
+                                            <option value="3">3</option>
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                        </select> 
+                                    </div>
+                                  </div>
+                                </form>
+                                 <div class="pagination-outer" id="org-pagination"> <ul class="pagination"> <li class="previous"><a href="#">«</a></li><li class="disabled hidden"><a>...</a></li> <li class="active"><a href="#">1</a></li> <li><a href="#">2</a></li> <li><a href="#">3</a></li> <li><a href="#">4</a></li><li class="disabled hidden"><a>...</a></li><li class="next"><a href="#">»</a></li></ul></div>                                
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+    </section>
+</article>
+<footer>
+    <div class="footer" _v-01a3a292="">
+    <div class="footer_content" _v-01a3a292="">
+        <div class="sina" _v-01a3a292="">
+            <p _v-01a3a292=""><img width="50" height="50" _v-01a3a292="" src="/assets/images/portal/sina.jpg"></p>
+            <a style="color: #fff;" _v-01a3a292="">新浪微博</a>
+              <div class="fade-in" _v-01a3a292="">
+              <img width="200" height="200" _v-01a3a292="" src="/assets/images/portal/sina.jpg">
+            </div>
+        </div>
+        
+        <div class="con" _v-01a3a292="">
+            <p _v-01a3a292="">运维支持：5484 5483</p>
+
+            <p _v-01a3a292="">技术支持：核工业计算机应用研究所
+            <br _v-01a3a292="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;核动力运行研究所</p>
+
+            <p _v-01a3a292="">版权所有：中国核能电力股份有限公司</p>
+        </div>
+        <div class="weixin" _v-01a3a292="">
+            <p _v-01a3a292=""><img width="50" height="50" _v-01a3a292="" src="/assets/images/portal/weixin.jpg"></p>
+            <a style="color: #fff;" _v-01a3a292="">微信公众平台</a>
+            <div class="fade-in" _v-01a3a292="">
+            <img width="200" height="200" _v-01a3a292="" src="/assets/images/portal/weixin.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+</footer>
+<script>
+    var scriptList=['./dist/header-footer.js','./dist/supervision-mine.js'];
+    loadScript("assets/libs/vue.min.js");
+    loadScript("assets/libs/daterangepicker/moment.min.js");
+    loadScript("assets/libs/jquery.min.js",function(){
+        loadScript("assets/libs/bootstrap.min.js");        
+        loadScript("assets/libs/jquery.blockUI.js"); 
+        loadScript("assets/libs/extendPagination.js"); 
+        loadScript("assets/libs/daterangepicker/daterangepicker.js",function(){               
+            loadScript("./dist/main.js");
+        });
+    })
+     var hidNode = null;
+    function hoverFunction(x) {
+        hidNode = x.getElementsByClassName("hoverInfo")[0];
+        hidNode.style.display = "table-cell";
+
+    }
+    function outFunction(x) {
+        hidNode.style.display = "none";
+    }
+</script><script src="assets/libs/vue.min.js"></script><script src="assets/libs/daterangepicker/moment.min.js"></script><script src="assets/libs/jquery.min.js"></script>
+
+<script src="assets/libs/bootstrap.min.js"></script><script src="assets/libs/jquery.blockUI.js"></script><script src="assets/libs/extendPagination.js"></script><script src="assets/libs/daterangepicker/daterangepicker.js"></script><script src="./dist/main.js"></script><script src="./dist/header-footer.js"></script><script src="./dist/supervision-mine.js"></script><div class="daterangepicker dropdown-menu ltr single opensright"><div class="calendar left single" style="display: block;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_start" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="calendar right" style="display: none;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" disabled="disabled" type="button">确定</button> <button class="cancelBtn btn btn-sm btn-default" type="button">取消</button></div></div></div><div class="daterangepicker dropdown-menu ltr single opensright"><div class="calendar left single" style="display: block;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_start" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="calendar right" style="display: none;"><div class="daterangepicker_input"><input class="input-mini form-control" type="text" name="daterangepicker_end" value="" style="display: none;"><i class="fa fa-calendar glyphicon glyphicon-calendar" style="display: none;"></i><div class="calendar-time" style="display: none;"><div></div><i class="fa fa-clock-o glyphicon glyphicon-time"></i></div></div><div class="calendar-table"></div></div><div class="ranges" style="display: none;"><div class="range_inputs"><button class="applyBtn btn btn-sm btn-success" disabled="disabled" type="button">确定</button> <button class="cancelBtn btn btn-sm btn-default" type="button">取消</button></div></div></div></body></html>

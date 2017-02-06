@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <base id="baseTag">   
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="apploication/json">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>会议管理-全部会议</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/daterangepicker.css">
+   <!-- <link rel="stylesheet" href="／assets/css/meeting.css"> -->
+    <!-- Bootstrap -->
+     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    .row{
+        margin:0;
+        padding:0;
+    }
+    .filter{
+        height: 4rem;
+        border-top: 1px solid #ddd;
+        list-style-type: none;
+        width: 100%;
+            display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    .filter .time-title{
+        min-width: 7%;
+        font-weight: 700;
+        text-align: right;
+        background: #ddd;
+        line-height: 4rem;
+        margin-right: 2rem;
+        padding-left: 3rem;
+    }
+    
+    .filter li{
+        float: left;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .date-select *{
+        float: left;
+        width: auto;
+        padding-top: 7px;
+    }
+        .tip{
+            padding-left: 2rem;
+            color: grey;
+            line-height: 4rem;
+        }   
+        .schedule-list{
+            border-top: 1px solid #ddd;
+            position: relative;
+        }
+        .schedule-list .table{
+
+            border-bottom: 1px solid #ddd
+        }
+        .schedule-list tbody{
+            border:none!important;
+        }
+        .date-left{
+            text-align: center;
+            border-right: 1px solid #ddd;
+            position: relative;
+            /*border-bottom: 1px solid #ddd;*/
+        }
+        .date-left .day{
+            font-weight: 700;
+            padding:1rem ;
+        }
+        .time-box{
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 0.6rem;
+            background: skyblue;
+            position: absolute;
+            top: 1rem;
+            right: -0.6rem;
+        }
+
+        .list-data>tbody>tr>td{
+            border-top:none;
+        }
+        .td-title{
+            padding-left: 1rem;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .detail td{
+            border-bottom:1px solid #ddd;
+        }
+        .list-data>tbody>tr>td.newday{
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+<!--head-->
+<header>
+    <com-header></com-header>
+</header>
+<!--head end-->
+<article class="article" id="article">
+
+                    <!-- <div role="tabpanel" class="tab-panel fade in active" > -->
+    <p class="tip"><span>按照多维度条件筛查所有督办信息。</span></p>
+    <ul class="filter" id="datePicker">
+        <li class="time-title">时间：</li>
+        <!--  <li v-for="n in 4"><a :class="['btn',{'btn-success':}]" data-mark="all" @click="changeTime($event)">全部</a></li> -->
+
+        <li><a class="btn btn-success" data-mark="all" @click="changeTime($event)">全部</a>
+        </li>
+        <li><a class="btn" data-mark="lastweek" @click="changeTime($event)">上周</a></li>
+        <li><a class="btn" data-mark="thisweek" @click="changeTime($event)">本周</a></li>
+        <li><a class="btn" data-mark="nextweek" @click="changeTime($event)">下周</a></li>
+        <li class="date-select">
+            <input type="text" class="form-control" id="startDate"
+                   placeholder="请选择开始日期"/><span>&nbsp;  到 &nbsp;</span>
+            <input type="text" class="form-control" id="endDate" placeholder="请选择结束日期"/>
+            <a class="btn btn-default " style="margin-left: 1.5rem;" data-mark="custom"
+               @click="changeTime($event)">时段</a>
+        </li>
+
+    </ul>
+    <section class="schedule-list">
+        <table class="list-data table">
+        <tbody v-for="item in meetingList">
+            <tr class="title">
+                <td v-if="item.new" class="date-left newday" rowspan="2">
+                    <p class="day" v-text="item.day"></p>
+                    <p class="month" v-text="item.month"></p>
+                    <div class="time-box"></div>
+                </td>
+                <td v-else class="date-left" rowspan="2"></td>
+                <td class="td-title" colspan="4" v-text="item.topic"></td>
+            </tr>
+            <tr class="detail">
+                <td class="timespan"><span class="glyphicon glyphicon-time"></span>{{item.time}}</td>
+                <td class="location"><span class="glyphicon glyphicon-map-marker" style="color:red;"></span> {{item.location}}</td>
+                <td class="host">主持人：{{item.chairman}}</td>
+                <td class="participants">参会人员：{{item.attendance}}</td>
+            </tr>
+            
+        </tbody>
+          
+        </table>
+    </section>
+</article>
+<footer>
+    <com-footer></com-footer>
+</footer>
+<script src="/assets/libs/vue.min.js"></script>
+<script src="/assets/libs/jquery.min.js"></script>
+<script src="/assets/libs/bootstrap.min.js"></script>
+<script src="/assets/libs/daterangepicker/moment.min.js"></script>
+<script src="/assets/libs/daterangepicker/daterangepicker.js"></script>
+<script src="/dist/main-override.js"></script>
+<script>
+function renderBody(){
+    //
+    var supervisionRequest={},meetingRequest=null;
+
+    var setSupervisionHeader=function(url,paramObj,iid){
+      if(paramObj);else paramObj={stamp:(new Date().getTime())};
+      var headered_url= (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},supervisionRequest.header,paramObj)):$.param(supervisionRequest.header));
+      return headered_url;
+    };
+    var setMeetingHeader=function (url, paramObj, iid) {
+        if(paramObj);else paramObj={stamp:(new Date().getTime())};
+        var headered_url= (iid?url.replace("%id%",iid):url)+"?"+(paramObj?$.param($.extend({},meetingRequest.header,paramObj)):$.param(meetingRequest.header));
+        return headered_url;
+    };
+      var getCookie= function(name) {
+            var arr,reg = new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+            if(arr = document.cookie.match(reg)){
+                return unescape(arr[2]);
+            } else{
+                return null;
+            }
+        };
+    var meetingVm=new Vue({
+        el:"#article",
+        data:{
+            userid:getCookie("userid"),
+            meetingList:[
+             ]
+        },
+        created:function() {
+            // body...
+             var params={
+                    userid:this.userid,
+                    startdate:"",
+                    enddate:""
+                };
+            meetingRequest=window.interfaceSettings.meetingRequest;
+            var self=this;
+            $.ajax({
+                url:setMeetingHeader(meetingRequest.api.getlist,params),
+                type:"get",
+                success:function(response){
+                   var flag="";
+                   for(var i=0,len=response.length;i<len;i++){
+                        if(flag!=response[i].startdate){
+                            flag=response[i].startdate;
+                            response[i].new=true;
+                            var startSplit=flag.split("-");
+                            response[i].month=startSplit[0]+"-"+startSplit[1];
+                            response[i].day=startSplit[2];
+                        }else{
+                            response[i].new=false;
+                        }
+                   }
+                   self.meetingList=response;
+                },
+                error:function(error){
+                    if(console)console.log("error",error);
+                }
+            });
+        },
+        ready:function(){
+            //
+            $("#startDate").daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        }, function (start, end, label) {
+        });
+        $("#endDate").daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true
+        });
+        },
+        methods:{
+            changeTime: function (ev) {
+                // 日期条件选择
+                var that = this;
+                ev.stopPropagation();
+                var curtar = ev.currentTarget;
+                var btn = $(curtar)
+                var mark = curtar.getAttribute("data-mark");
+                if (!btn.hasClass("btn-success") || mark == "custom") {
+                    $("#datePicker").find(".btn").removeClass("btn-success");
+                    btn.addClass("btn-success");
+                var params={
+                    userid:this.userid
+                };
+                    switch (mark) {
+                        case "all":
+                            break;
+                        case "lastweek":
+                            params.startdate = moment().day(-6).format("YYYY-MM-DD");
+                           params.enddate = moment().day(0).format("YYYY-MM-DD");
+                            break;
+                        case "thisweek":
+                            params.startdate = moment().weekday(1).format("YYYY-MM-DD");
+                            params.enddate = moment().day(7).format("YYYY-MM-DD");
+                            break;
+                        case "nextweek":
+                            params.startdate  = moment().day(8).format("YYYY-MM-DD");
+                           params.enddate = moment().day(14).format("YYYY-MM-DD");
+                            break;
+                        case "custom":
+                            params.startdate = $("#startDate").val();
+                          params.enddate = $("#endDate").val();
+                            break;
+                    }
+                    // console.log(JSON.stringify(this.filterOptions))
+                    this.fetchMeetingList(params);
+                }
+            },
+            fetchMeetingList:function(params){
+                var self=this;
+                $.ajax({
+                type: "get",
+                dataType: "json",
+                contentType: "application/json",
+                url:setMeetingHeader(meetingRequest.api.getlist,params),
+                success: function (response, state, jqxhr) {
+                    for(var i=0,len=response.length;i<len;i++){
+                        if(flag!=response[i].startdate){
+                            flag=response[i].startdate;
+                            response[i].new=true;
+                            var startSplit=flag.split("-");
+                            response[i].month=startSplit[0]+"-"+startSplit[1];
+                            response[i].day=startSplit[2];
+                        }else{
+                            response[i].new=false;
+                        }
+                   }
+                   self.meetingList=response;
+                },
+                error: function (data, state, jqxhr) {
+                    // console.log(data)
+                }
+            });
+            }
+        }
+    });
+}
+    
+</script>
+</body>
+</html>
